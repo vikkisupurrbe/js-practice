@@ -25,15 +25,8 @@ function freqCounter(paragraph) {
   let map = new Map();
 
   for (const normalWord of normalWords) {
-    let freq = map.get(normalWord);
-
-    if (map.has(normalWord)) {
-      freq += 1; 
-      map.set(normalWord, freq);
-      // map has no idea unless call map.set() to update the freq
-    } else {
-      map.set(normalWord, 1);
-    }
+    let freq = map.get(normalWord) || 0;
+    map.set(normalWord, freq + 1);
   }
 
   return map;
