@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Inventory Manager</h1>
+
+  <!-- Add item form -->
+  <div class="form-container">
+    <input type="text" id="name" placeholder="Item name" />
+    <input type="number" id="price" placeholder="Price" />
+    <input type="number" id="quantity" placeholder="Quantity" />
+    <button id="add-btn">Add Item</button>
+  </div>
+
+  <!-- Search -->
+  <div class="search-container">
+    <input type="text" id="search" placeholder="Search by name or ID" />
+    <button id="search-btn">Search</button>
+  </div>
+
+  <!-- Inventory grid -->
+  <div id="inventory-grid"></div>
+
+  <script src="inventoryManager.js"></script>
+</body>
+</html>

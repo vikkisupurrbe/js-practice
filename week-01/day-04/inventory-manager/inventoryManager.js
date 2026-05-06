@@ -1,0 +1,120 @@
+/*
+
+Build an inventory manager: add items (objects with name, price, quantity), search, update, delete. Use destructuring and spread/rest throughout.
+
+*/
+
+/*
+
+Data structure: [{}, {}, {}]
+
+[
+    {
+      ID: 1,
+      Name: "Pompompurin Plate",
+      Price: 19.99,
+      Quantity: 12
+    },
+
+    {
+      ID: 2,
+      Name: "Pompompurin Plushie",
+      Price: 29.99,
+      Quantity: 24
+    }
+  ]
+
+*/
+
+function inventoryManager() {
+  const inventory = [
+    {
+      id: 1,
+      name: "Pompompurin Plate",
+      price: 19.99,
+      quantity: 12
+    }
+  ];
+  let nextId = 1;
+
+  // Add items
+  function add({name, price, quantity}) {
+    /*
+      check if name, price, and quantity is filled
+      prompt "name/price/quantity is required" if any field is empty
+      add the item to the inventory, id: previous item id + 1
+    */
+  }
+
+  // Search item
+  function searchItemById(id) {
+    /*
+      prompt form enter item id
+      find the item with the correct id
+        if id exists, show the item
+        if id does not exist, notify the user
+    */
+  }
+
+  function searchItemByName(name) {
+    /*
+      prompt form enter item name
+      find the item including the name
+        if name exists, show the item
+        if name does not exist, notify the user
+    */
+  }
+
+  // Update item
+  function updateItemById(id) {
+    /*
+      find the item with the correct id
+        if id exists, promt form with name/price/quantity to update
+        if id does not exist, notify the user
+    */
+  }
+
+  // Delete item
+  function deleteItemById(id) {
+    /*
+    find the item with the correct id
+    remove the item from the inventory
+    */
+  }
+
+  return {
+    add, searchItemById, searchItemByName, updateItemById, deleteItemById,
+    getInventory() {return inventory;}
+  }
+}
+
+const myInventoryManager = inventoryManager();
+const grid = document.getElementById('inventory-grid');
+renderInventory(myInventoryManager.getInventory());
+
+// renders all cards to the grid
+function renderInventory(items) {
+  grid.innerHTML = '';
+  items.forEach(({ id, name, price, quantity }) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <h2>${name}</h2>
+      <p>ID: ${id}</p>
+      <p>Price: $${price}</p>
+      <p>Quantity: ${quantity}</p>
+      <div class="card-buttons">
+        <button onclick="handleEdit(${id})">Edit</button>
+        <button class="delete-btn" onclick="handleDelete(${id})">Delete</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function handleEdit(id) { }
+function handleDelete(id) { }
+
+// Event handlers
+document.getElementById('add-btn').addEventListener('click', () => { });
+document.getElementById('search-btn').addEventListener('click', () => { });
