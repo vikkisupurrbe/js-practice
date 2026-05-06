@@ -19,21 +19,13 @@ Examples
 */
 
 function removeSmallest(numbers) {
-  if (numbers.length === 0 || numbers.length === 1) return [];
+  if (numbers.length === 0) return []; // a single element array is covered
   
-  let min = Infinity;
-  let index = 0;
-  
-  for (let i = 0; i < numbers.length; i++) {
-    if (numbers[i] < min) {
-      min = numbers[i];
-      console.log(`min is ${min}`);
-      index = i;
-      console.log(`index is ${index}`);
-    } 
-  }
+  // replace the for loop with the following
+  const min = Math.min(...numbers);
+  const index = numbers.indexOf(min); 
 
-  return numbers.filter((item, position) => position !== index);
+  return numbers.filter((_, position) => position !== index); // replace unused parameters with _ to signal intentionally that it's not used
 }
 
 console.log(removeSmallest([1, 2, 3, 4, 5])); // expected [2, 3, 4, 5] got [2, 3, 4, 5]
