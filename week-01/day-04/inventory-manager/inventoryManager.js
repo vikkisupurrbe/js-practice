@@ -62,7 +62,7 @@ function inventoryManager() {
         if id does not exist, notify the user
     */
     const item = inventory.find((item) => item.id === id); // find returns the found item
-    if (!item) alert("ID does not exist") // only fire once if id isn't found;
+    if (!item) alert("ID does not exist"); // only fire once if id isn't found;
     return item ? [item] : inventory;
   }
 
@@ -73,6 +73,11 @@ function inventoryManager() {
         if name exists, show the item
         if name does not exist, notify the user
     */
+    const item = inventory.find(
+      (item) => item.name.toLowerCase().includes(name.toLowerCase())
+    );
+    if (!item) alert("Name does not exist");
+    return item ? [item] : inventory;
   }
 
   // Update item
@@ -141,5 +146,9 @@ document.getElementById('add-btn').addEventListener('click', () => {
 });
 document.getElementById('search-btn').addEventListener('click', () => {
   const search = Number(document.getElementById("search").value);
-  renderInventory(myInventoryManager.searchItemById(search));
+  if (search === NaN) {
+    renderInventory(myInventoryManager.searchItemByName(search));
+  } else {
+    renderInventory(myInventoryManager.searchItemById(search));
+  }
 });
