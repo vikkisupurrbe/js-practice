@@ -54,29 +54,17 @@ function inventoryManager() {
   }
 
   // Search item
-  function searchItemById(id) {
+  function searchItem(query) {
     /*
-      prompt form enter item id
-      find the item with the correct id
+      prompt form enter item id/name
+      find the item with the correct id/name
         if id exists, show the item
         if id does not exist, notify the user
     */
-    const item = inventory.find((item) => item.id === id); // find returns the found item
-    if (!item) alert("ID does not exist"); // only fire once if id isn't found;
-    return item ? [item] : inventory;
-  }
-
-  function searchItemByName(name) {
-    /*
-      prompt form enter item name
-      find the item including the name
-        if name exists, show the item
-        if name does not exist, notify the user
-    */
     const item = inventory.find(
-      (item) => item.name.toLowerCase().includes(name.toLowerCase())
-    );
-    if (!item) alert("Name does not exist");
+      (item) => item.id === query || item.name.toLowerCase().includes(query.toLowerCase())
+    ); // find returns the found item
+    if (!item) alert("Item does not exist"); // only fire once if id isn't found;
     return item ? [item] : inventory;
   }
 
@@ -103,8 +91,7 @@ function inventoryManager() {
   }
 
   return {
-    add, searchItemById, searchItemByName, updateItemById, deleteItemById,
-    getInventory
+    add, searchItem, updateItemById, deleteItemById, getInventory
   }
 }
 
@@ -146,9 +133,5 @@ document.getElementById('add-btn').addEventListener('click', () => {
 });
 document.getElementById('search-btn').addEventListener('click', () => {
   const search = Number(document.getElementById("search").value);
-  if (search === NaN) {
-    renderInventory(myInventoryManager.searchItemByName(search));
-  } else {
-    renderInventory(myInventoryManager.searchItemById(search));
-  }
+  renderInventory(myInventoryManager.searchItem(search));
 });
