@@ -62,10 +62,11 @@ function inventoryManager() {
         if id does not exist, notify the user
     */
     const item = inventory.find(
-      (item) => item.id === query || item.name.toLowerCase().includes(query.toLowerCase())
+      item => item.id === Number(query) || // query from DOM is always a string, convert query to a number for a match
+      item.name.toLowerCase().includes(query.toLowerCase())
     ); // find returns the found item
     if (!item) alert("Item does not exist"); // only fire once if id isn't found;
-    return item ? [item] : inventory;
+    return item ? [item] : [];
   }
 
   // Update item
@@ -132,6 +133,6 @@ document.getElementById('add-btn').addEventListener('click', () => {
   renderInventory(myInventoryManager.getInventory());
 });
 document.getElementById('search-btn').addEventListener('click', () => {
-  const search = Number(document.getElementById("search").value);
-  renderInventory(myInventoryManager.searchItem(search));
+  const query = document.getElementById("search").value;
+  renderInventory(myInventoryManager.searchItem(query));
 });
