@@ -61,6 +61,13 @@ function inventoryManager() {
         if id exists, show the item
         if id does not exist, notify the user
     */
+    inventory.find((item) => {
+      if (item.id === id) {
+        return item;
+      } else {
+        alert("ID does not exist!")
+      }
+    })
   }
 
   function searchItemByName(name) {
@@ -136,4 +143,7 @@ document.getElementById('add-btn').addEventListener('click', () => {
   myInventoryManager.add({ name, price, quantity });
   renderInventory(myInventoryManager.getInventory());
 });
-document.getElementById('search-btn').addEventListener('click', () => { });
+document.getElementById('search-btn').addEventListener('click', () => {
+  const search = document.getElementById("search").value;
+  renderInventory(myInventoryManager.searchItemById(search));
+});
