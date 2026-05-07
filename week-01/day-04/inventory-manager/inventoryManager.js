@@ -38,12 +38,31 @@ function inventoryManager() {
   let nextId = 1;
 
   // Add items
-  function add({name, price, quantity}) {
+  function add({ name, price, quantity }) {
     /*
       check if name, price, and quantity is filled
       prompt "name/price/quantity is required" if any field is empty
       add the item to the inventory, id: previous item id + 1
     */
+
+    // form validation
+    name = document.getElementById("name").value;
+    price = document.getElementById("price").value;
+    quantity = document.getElementById("quantity").value;
+
+    if (name === "") {
+      alert("Name is required!");
+    } else if (price === "") {
+      alert("Price is required!");
+    } else if (quantity === "") {
+      alert("Quantity is required!");
+    } else {
+      // add an item
+      inventory.push({ id: nextId + 1, name, price, quantity });
+      nextId += 1;
+    }
+
+    console.log(inventory, nextId);
   }
 
   // Search item
@@ -82,9 +101,14 @@ function inventoryManager() {
     */
   }
 
+  // Load inventory
+  function getInventory() {
+    return inventory;
+  }
+
   return {
     add, searchItemById, searchItemByName, updateItemById, deleteItemById,
-    getInventory() {return inventory;}
+    getInventory
   }
 }
 
@@ -116,5 +140,8 @@ function handleEdit(id) { }
 function handleDelete(id) { }
 
 // Event handlers
-document.getElementById('add-btn').addEventListener('click', () => { });
+document.getElementById('add-btn').addEventListener('click', () => {
+  myInventoryManager.add({ name, price, quantity });
+  renderInventory(myInventoryManager.getInventory());
+});
 document.getElementById('search-btn').addEventListener('click', () => { });
