@@ -27,14 +27,7 @@ Data structure: [{}, {}, {}]
 */
 
 function inventoryManager() {
-  const inventory = [
-    {
-      id: 1,
-      name: "Pompompurin Plate",
-      price: 19.99,
-      quantity: 12
-    }
-  ];
+  const inventory = [];
   let nextId = 1;
 
   // Add items
@@ -46,10 +39,6 @@ function inventoryManager() {
     */
 
     // form validation
-    name = document.getElementById("name").value;
-    price = document.getElementById("price").value;
-    quantity = document.getElementById("quantity").value;
-
     if (name === "") {
       alert("Name is required!");
     } else if (price === "") {
@@ -58,8 +47,7 @@ function inventoryManager() {
       alert("Quantity is required!");
     } else {
       // add an item
-      inventory.push({ id: nextId + 1, name, price, quantity });
-      nextId += 1;
+      inventory.push({ id: nextId++, name, price, quantity });
     }
 
     console.log(inventory, nextId);
@@ -141,6 +129,10 @@ function handleDelete(id) { }
 
 // Event handlers
 document.getElementById('add-btn').addEventListener('click', () => {
+  // read DOM values in the event handler and pass them in
+  const name = document.getElementById("name").value;
+  const price = Number(document.getElementById("price").value);
+  const quantity = Number(document.getElementById("quantity").value);
   myInventoryManager.add({ name, price, quantity });
   renderInventory(myInventoryManager.getInventory());
 });
