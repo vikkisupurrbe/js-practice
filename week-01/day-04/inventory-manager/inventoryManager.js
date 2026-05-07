@@ -61,13 +61,9 @@ function inventoryManager() {
         if id exists, show the item
         if id does not exist, notify the user
     */
-    inventory.find((item) => {
-      if (item.id === id) {
-        return item;
-      } else {
-        alert("ID does not exist!")
-      }
-    })
+    const item = inventory.find((item) => item.id === id); // find returns the found item
+    if (!item) alert("ID does not exist") // only fire once if id isn't found;
+    return item ? [item] : inventory;
   }
 
   function searchItemByName(name) {
@@ -144,6 +140,6 @@ document.getElementById('add-btn').addEventListener('click', () => {
   renderInventory(myInventoryManager.getInventory());
 });
 document.getElementById('search-btn').addEventListener('click', () => {
-  const search = document.getElementById("search").value;
+  const search = Number(document.getElementById("search").value);
   renderInventory(myInventoryManager.searchItemById(search));
 });
