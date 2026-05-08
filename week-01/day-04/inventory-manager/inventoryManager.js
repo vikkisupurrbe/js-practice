@@ -30,7 +30,7 @@ function inventoryManager() {
   const inventory = [];
   let nextId = 1;
 
-  // Add items
+  // Add item
   function add({ name, price, quantity }) {
     /*
       check if name, price, and quantity is filled
@@ -49,9 +49,8 @@ function inventoryManager() {
       // add an item
       inventory.push({ id: nextId++, name, price, quantity });
     }
-
-    console.log(inventory, nextId);
   }
+
 
   // Search item
   function searchItem(query) {
@@ -63,28 +62,25 @@ function inventoryManager() {
     */
     const item = inventory.find(
       item => item.id === Number(query) || // query from DOM is always a string, convert query to a number for a match
-      item.name.toLowerCase().includes(query.toLowerCase())
+        item.name.toLowerCase().includes(query.toLowerCase())
     ); // find returns the found item
     if (!item) alert("Item does not exist"); // only fire once if id isn't found;
     return item ? [item] : [];
   }
 
+
   // Update item
   function updateItemById(id) {
-    /*
-      find the item with the correct id
-        if id exists, promt form with name/price/quantity to update
-        if id does not exist, notify the user
-    */
+    // find the item index
+    // update it using spread
   }
+
 
   // Delete item
   function deleteItemById(id) {
-    /*
-    find the item with the correct id
-    remove the item from the inventory
-    */
+
   }
+
 
   // Load inventory
   function getInventory() {
@@ -95,6 +91,7 @@ function inventoryManager() {
     add, searchItem, updateItemById, deleteItemById, getInventory
   }
 }
+
 
 const myInventoryManager = inventoryManager();
 const grid = document.getElementById('inventory-grid');
@@ -120,8 +117,34 @@ function renderInventory(items) {
   });
 }
 
-function handleEdit(id) { }
-function handleDelete(id) { }
+function handleEdit(id) {
+  // find the current item's values to pre-fill the form
+  // show the form in edit mode
+  // on confirm, read the new values and call updateItemById
+  const itemToEdit = myInventoryManager.getInventory().find((item) => item.id === id);
+  if (!itemToEdit) return;
+  // write current item values directly into the form
+  document.getElementById("name").value = itemToEdit.name;
+  document.getElementById("price").value = itemToEdit.price;
+  document.getElementById("quantity").value = itemToEdit.quantity;
+  document.getElementById("add-btn").textContent = "Update Item";
+  // store the id on the button
+  let storedId = document.getElementById("add-btn").dataset.editId;
+  storedId = id;
+  
+  const nameToEdit =  document.getElementById("name").value;
+  const priceToEdit =  document.getElementById("price").value;
+  const quantityToEdit =  document.getElementById("quantity").value;
+
+  document.getElementById('add-btn').addEventListener('click', () => {
+    myInventoryManager.updateItemById(storedId, { nameToEdit, priceToEdit, quantityToEdit });
+    document.getElementById("add-btn").textContent = "Add Item";
+  });
+}
+
+function handleDelete(id) {
+
+}
 
 // Event handlers
 document.getElementById('add-btn').addEventListener('click', () => {
