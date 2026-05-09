@@ -70,9 +70,13 @@ function inventoryManager() {
 
 
   // Update item
-  function updateItemById(id) {
+  function updateItemById(id, {name, price, quantity}) {
     // find the item index
+    const itemToEdit = inventory.find((item) => item.id === id);
     // update it using spread
+    itemToEdit.name = name;
+    itemToEdit.price = price;
+    itemToEdit.quantity = quantity;
   }
 
 
@@ -94,15 +98,15 @@ function inventoryManager() {
 
 
 const myInventoryManager = inventoryManager();
-const grid = document.getElementById('inventory-grid');
+const grid = document.getElementById("inventory-grid");
 renderInventory(myInventoryManager.getInventory());
 
 // renders all cards to the grid
 function renderInventory(items) {
-  grid.innerHTML = '';
+  grid.innerHTML = "";
   items.forEach(({ id, name, price, quantity }) => {
-    const card = document.createElement('div');
-    card.className = 'card';
+    const card = document.createElement("div");
+    card.className = "card";
     card.innerHTML = `
       <h2>${name}</h2>
       <p>ID: ${id}</p>
@@ -129,17 +133,7 @@ function handleEdit(id) {
   document.getElementById("quantity").value = itemToEdit.quantity;
   document.getElementById("add-btn").textContent = "Update Item";
   // store the id on the button
-  let storedId = document.getElementById("add-btn").dataset.editId;
-  storedId = id;
-  
-  const nameToEdit =  document.getElementById("name").value;
-  const priceToEdit =  document.getElementById("price").value;
-  const quantityToEdit =  document.getElementById("quantity").value;
-
-  document.getElementById('add-btn').addEventListener('click', () => {
-    myInventoryManager.updateItemById(storedId, { nameToEdit, priceToEdit, quantityToEdit });
-    document.getElementById("add-btn").textContent = "Add Item";
-  });
+  document.getElementById("add-btn").dataset.editId = id;
 }
 
 function handleDelete(id) {
@@ -147,15 +141,26 @@ function handleDelete(id) {
 }
 
 // Event handlers
-document.getElementById('add-btn').addEventListener('click', () => {
+document.getElementById("add-btn").addEventListener("click", () => {
   // read DOM values in the event handler and pass them in
   const name = document.getElementById("name").value;
   const price = Number(document.getElementById("price").value);
   const quantity = Number(document.getElementById("quantity").value);
-  myInventoryManager.add({ name, price, quantity });
+  const editId = document.getElementById("add-btn").dataset.editId;
+
+  if (editId) {
+    // update mode by checking the presence of editId, not adding another event listener
+    myInventoryManager.updateItemById(Number(editId), {name, price, quantity});
+    document.getElementById("add-btn").dataset.editId = "";
+    document.getElementById("add-btn").textContent = "Add Item";
+  } else {
+    // add mode
+    myInventoryManager.add({ name, price, quantity });
+  }
   renderInventory(myInventoryManager.getInventory());
 });
-document.getElementById('search-btn').addEventListener('click', () => {
+
+document.getElementById("search-btn").addEventListener("click", () => {
   const query = document.getElementById("search").value;
   renderInventory(myInventoryManager.searchItem(query));
 });
