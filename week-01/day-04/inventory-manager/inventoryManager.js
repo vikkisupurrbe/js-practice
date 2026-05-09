@@ -138,10 +138,8 @@ function handleEdit(id) {
 }
 
 function handleDelete(id) {
-  const itemToDelete = myInventoryManager.getInventory().find((item) => item.id === id);
-  if (!itemToDelete) return;
-  // store the id on the button
-  document.getElementsByClassName("delete-btn").dataset.deleteId = id;
+  myInventoryManager.deleteItemById(id);
+  renderInventory(myInventoryManager.getInventory());
 }
 
 // Event handlers
@@ -176,12 +174,3 @@ document.getElementById("search-btn").addEventListener("click", () => {
   const query = document.getElementById("search").value;
   renderInventory(myInventoryManager.searchItem(query));
 });
-
-if (document.getElementsByClassName("delete-btn")) {
-  document.getElementsByClassName("delete-btn").addEventListener("click", () => {
-    if (deleteId) {
-      deleteItemById(deleteId);
-    }
-    renderInventory(myInventoryManager.searchItem(query));
-  });
-}
