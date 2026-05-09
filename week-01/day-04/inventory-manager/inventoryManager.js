@@ -70,19 +70,20 @@ function inventoryManager() {
 
 
   // Update item
-  function updateItemById(id, {name, price, quantity}) {
+  function updateItemById(id, { name, price, quantity }) {
     // find the item index
-    const itemToEdit = inventory.find((item) => item.id === id);
+    const index = inventory.findIndex(item => item.id === id);
     // update it using spread
-    itemToEdit.name = name;
-    itemToEdit.price = price;
-    itemToEdit.quantity = quantity;
+    inventory[index] = { ...inventory[index], name, price, quantity }; // maintain immutability by using spread, important in React later on
   }
 
 
   // Delete item
   function deleteItemById(id) {
-
+    // find the item index
+    const index = inventory.findIndex(item => item.id === id);
+    // delete item
+    inventory.splice(index, 1);
   }
 
 
@@ -137,7 +138,10 @@ function handleEdit(id) {
 }
 
 function handleDelete(id) {
-
+  const itemToDelete = myInventoryManager.getInventory().find((item) => item.id === id);
+  if (!itemToDelete) return;
+  // store the id on the button
+  document.getElementsByClassName("delete-btn").dataset.deleteId = id;
 }
 
 // Event handlers
@@ -150,12 +154,20 @@ document.getElementById("add-btn").addEventListener("click", () => {
 
   if (editId) {
     // update mode by checking the presence of editId, not adding another event listener
-    myInventoryManager.updateItemById(Number(editId), {name, price, quantity});
+    myInventoryManager.updateItemById(Number(editId), { name, price, quantity });
     document.getElementById("add-btn").dataset.editId = "";
     document.getElementById("add-btn").textContent = "Add Item";
+    // clear input
+    document.getElementById("name").value = "";
+    document.getElementById("price").value = "";
+    document.getElementById("quantity").value = "";
   } else {
     // add mode
     myInventoryManager.add({ name, price, quantity });
+    // clear input
+    document.getElementById("name").value = "";
+    document.getElementById("price").value = "";
+    document.getElementById("quantity").value = "";
   }
   renderInventory(myInventoryManager.getInventory());
 });
@@ -164,3 +176,12 @@ document.getElementById("search-btn").addEventListener("click", () => {
   const query = document.getElementById("search").value;
   renderInventory(myInventoryManager.searchItem(query));
 });
+
+if (document.getElementsByClassName("delete-btn")) {
+  document.getElementsByClassName("delete-btn").addEventListener("click", () => {
+    if (deleteId) {
+      deleteItemById(deleteId);
+    }
+    renderInventory(myInventoryManager.searchItem(query));
+  });
+}
