@@ -142,30 +142,33 @@ function handleDelete(id) {
   renderInventory(myInventoryManager.getInventory());
 }
 
+function clearForm() {
+  document.getElementById("name").value = "";
+  document.getElementById("price").value = "";
+  document.getElementById("quantity").value = "";
+}
+
 // Event handlers
 document.getElementById("add-btn").addEventListener("click", () => {
   // read DOM values in the event handler and pass them in
   const name = document.getElementById("name").value;
   const price = Number(document.getElementById("price").value);
   const quantity = Number(document.getElementById("quantity").value);
+  const addBtn = document.getElementById("add-btn");
   const editId = document.getElementById("add-btn").dataset.editId;
 
   if (editId) {
     // update mode by checking the presence of editId, not adding another event listener
     myInventoryManager.updateItemById(Number(editId), { name, price, quantity });
-    document.getElementById("add-btn").dataset.editId = "";
-    document.getElementById("add-btn").textContent = "Add Item";
+    addBtn.dataset.editId = "";
+    addBtn.textContent = "Add Item";
     // clear input
-    document.getElementById("name").value = "";
-    document.getElementById("price").value = "";
-    document.getElementById("quantity").value = "";
+    clearForm();
   } else {
     // add mode
     myInventoryManager.add({ name, price, quantity });
     // clear input
-    document.getElementById("name").value = "";
-    document.getElementById("price").value = "";
-    document.getElementById("quantity").value = "";
+    clearForm();
   }
   renderInventory(myInventoryManager.getInventory());
 });
