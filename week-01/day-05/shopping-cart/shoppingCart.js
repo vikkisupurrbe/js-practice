@@ -30,6 +30,10 @@ function shoppingCart() {
   }
 
   function add({ name, quantity, price }) {
+    // validation
+    if (quantity <= 0) { console.log("Quantity must be positive"); return; }
+    if (price < 0) {console.log("Price cannot be negative"); return;}
+
     cart.push({
       id: nextId++,
       name,
@@ -40,19 +44,18 @@ function shoppingCart() {
 
   function remove(id) {
     // find the item
-    const index = cart.indexOf(cart.find(item => item.id === id));
+    const index = cart.findIndex(item => item.id === id); // findIndex does both indexOf and find in one step
     if (index === -1) return;
     // remove the item
-    cart.splice(index);
+    cart.splice(index, 1); // splice without a delete count removes everything
   }
 
   function filterByPriceRange(min, max) {
     if (min === undefined && max === undefined) return cart;
-    min === undefined ? 0 : min;
-    max === undefined ? Infinity : max;
+    min = min === undefined ? 0 : min;
+    max = max === undefined ? Infinity : max;
     return cart.filter(item => min <= item.price && item.price <= max);
   }
-  
   
   function total() {
     if (cart.length === 0) return 0;
@@ -62,7 +65,10 @@ function shoppingCart() {
   }
   
   function applyDiscounts(discount) {
-    return Math.round(subtotal * (1 - discount) * 100) / 100;
+    // validation
+    if (discount < 0 || discount > 1) { console.log("Discount must be between 0 and 1"); return; }
+
+    return Math.round(total() * (1 - discount) * 100) / 100;
   }
 
   return {
@@ -72,7 +78,13 @@ function shoppingCart() {
 
 const myShoppingCart = shoppingCart();
 
-// Test
+
+
+/*
+  *********************************************
+  Test
+  *********************************************
+*/
 
 // Add
 myShoppingCart.add({
@@ -138,3 +150,17 @@ console.log(myShoppingCart.total()); // expect 912 get 912
 
 // Apply discount
 console.log(myShoppingCart.applyDiscounts(0.1)); // expect 820.8 get 820.8
+
+// Edge cases
+
+// Negative quantity
+myShoppingCart.add({ name: "apple", quantity: -1, price: 0.5 }); // expected "Quantity must be positive" get "Quantity must be positive"
+
+// Zero price
+myShoppingCart.add({ name: "free item", quantity: 1, price: 0 }); // expected no error message get no error message
+
+// Discount > 1 (more than 100% off)
+myShoppingCart.applyDiscounts(1.5); // expected "Discount must be between 0 and 1" get "Discount must be between 0 and 1"
+
+// Discount < 0 (negative discount — a surcharge?)
+myShoppingCart.applyDiscounts(-0.1); // expected "Discount must be between 0 and 1" get "Discount must be between 0 and 1"
