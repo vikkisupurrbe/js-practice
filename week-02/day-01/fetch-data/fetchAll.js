@@ -5,12 +5,12 @@ import { fetchQuotes } from "./fetchQuotes.js";
 // fetch with chained .then()
 function fetchSequential() {
   const start = Date.now();
-  fetchJokes()
+  return fetchJokes()
     .then(fetchWeather())
     .then(fetchQuotes())
     .then(response => {
       const timeElapsed = Date.now() - start;
-      return `It took ${timeElapsed} ms`;
+      return `fetchSequential took ${timeElapsed} ms`;
     })
 }
 
@@ -24,7 +24,7 @@ function fetchParallel() {
   return Promise.all([fetchJokes(), fetchWeather(), fetchQuotes()])
     .then(response => {
       const timeElapsed = Date.now() - start;
-      return `It took ${timeElapsed} ms`;
+      return `fetchParallel took ${timeElapsed} ms`;
     })
 }
 
