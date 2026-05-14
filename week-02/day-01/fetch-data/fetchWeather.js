@@ -8,7 +8,7 @@ then refactor with Promise.all to run in parallel and compare timing
 
 import { fetchWeatherApi } from "openmeteo";
 
-function fetchWeather() {
+export function fetchWeather() {
   const url = "https://api.open-meteo.com/v1/forecast";
   const params = {
     latitude: 49.28,

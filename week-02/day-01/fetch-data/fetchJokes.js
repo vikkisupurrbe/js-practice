@@ -32,7 +32,7 @@ Response {
 
 */
 
-function fetchJokes() {
+export function fetchJokes() {
   const url = "https://official-joke-api.appspot.com/random_joke";
   return fetch(url)
     .then((response) => {

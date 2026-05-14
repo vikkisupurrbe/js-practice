@@ -6,7 +6,7 @@ then refactor with Promise.all to run in parallel and compare timing
 
 */
 
-function fetchQuotes() {
+export function fetchQuotes() {
   const url = "https://quotesapi.prayushadhikari.com.np/api/quotes/random";
   return fetch(url)
   .then((response) => {
@@ -18,4 +18,5 @@ function fetchQuotes() {
 }
 
 fetchQuotes()
-  .then(response => console.log(response.data[0]));
+  .then(response => console.log(response.data[0]))
+  .catch(error => console.log(error));
