@@ -6,9 +6,9 @@ import { fetchQuotes } from "./fetchQuotes.js";
 function fetchSequential() {
   const start = Date.now();
   return fetchJokes()
-    .then(fetchWeather())
-    .then(fetchQuotes())
-    .then(response => {
+    .then(() => fetchWeather())
+    .then(() => fetchQuotes())
+    .then(() => {
       const timeElapsed = Date.now() - start;
       return `fetchSequential took ${timeElapsed} ms`;
     })
