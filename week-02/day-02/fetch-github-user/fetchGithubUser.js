@@ -11,7 +11,7 @@ Handle 404 errors gracefully.
 
 */
 
-import { Octokit, App } from "octokit";
+import { Octokit } from "octokit";
 
 function fetchUser(username) {
   const octokit = new Octokit();
@@ -21,11 +21,16 @@ function fetchUser(username) {
       'X-GitHub-Api-Version': '2026-03-10'
     }
   })
+    .catch((response) => {
+      if (response.status !== 200) {
+        throw new Error(`HTTP error! Status: ${response.status}`)
+      }
+    })
 }
 
 fetchUser("vikkisupurrbe")
   .then(response => {
-    const {login, name, avatar_url} = response.data;
+    const { login, name, avatar_url } = response.data;
     console.log({
       username: login,
       name: name,

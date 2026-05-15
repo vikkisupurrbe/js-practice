@@ -11,7 +11,7 @@ Handle 404 errors gracefully.
 
 */
 
-import { Octokit, App } from "octokit";
+import { Octokit } from "octokit";
 
 function fetchRepos(username) {
   const octokit = new Octokit();
@@ -20,6 +20,11 @@ function fetchRepos(username) {
       'X-GitHub-Api-Version': '2026-03-10'
     }
   })
+    .catch((response) => {
+      if (response.status !== 200) {
+        throw new Error(`HTTP error! Status: ${response.status}`)
+      }
+    })
 }
 
 fetchRepos("vikkisupurrbe")

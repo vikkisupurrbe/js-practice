@@ -11,7 +11,7 @@ Handle 404 errors gracefully.
 
 */
 
-import { Octokit, App } from "octokit";
+import { Octokit } from "octokit";
 
 function fetchFollowers(username) {
   const octokit = new Octokit();
@@ -19,6 +19,11 @@ function fetchFollowers(username) {
     username: `${username}`,
     headers: {
       'X-GitHub-Api-Version': '2026-03-10'
+    }
+  })
+  .catch((response) => {
+    if (response.status !== 200) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
     }
   })
 }
@@ -32,7 +37,7 @@ fetchFollowers("vikkisupurrbe")
       })
     )
     console.log({
-      total_number_of_followers: response.data.length,
+      total_followers: response.data.length,
       followers
     })
   })
