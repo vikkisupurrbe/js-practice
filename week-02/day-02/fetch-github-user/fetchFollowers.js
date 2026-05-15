@@ -20,25 +20,26 @@ function fetchFollowers(username) {
     headers: {
       'X-GitHub-Api-Version': '2026-03-10'
     }
-  })
-  .catch((response) => {
-    if (response.status !== 200) {
-      throw new Error(`HTTP error! Status: ${response.status}`)
-    }
-  })
+  });
 }
 
 fetchFollowers("vikkisupurrbe")
   .then(response => {
     const followers = response.data.map((item) =>
-      ({
-        name: item.login,
-        url: item.url
-      })
+    ({
+      name: item.login,
+      url: item.url
+    })
     )
     console.log({
       total_followers: response.data.length,
       followers
     })
   })
-  .catch(error => console.log(error))
+  .catch(error => {
+    if (error.status === 404) {
+      console.log("User not found");
+    } else {
+      console.log(`Error: ${error.message}`);
+    }
+  })

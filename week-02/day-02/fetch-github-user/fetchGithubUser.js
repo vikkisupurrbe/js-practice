@@ -20,12 +20,8 @@ function fetchUser(username) {
     headers: {
       'X-GitHub-Api-Version': '2026-03-10'
     }
-  })
-    .catch((response) => {
-      if (response.status !== 200) {
-        throw new Error(`HTTP error! Status: ${response.status}`)
-      }
-    })
+  });
+  // .catch is for handling errors, not detecting them
 }
 
 fetchUser("vikkisupurrbe")
@@ -37,4 +33,10 @@ fetchUser("vikkisupurrbe")
       avatar: avatar_url
     });
   })
-  .catch(error => console.log(error))
+  .catch(error => {
+    if (error.status === 404) {
+      console.log("User not found");
+    } else {
+      console.log(`Error: ${error.message}`);
+    }
+  })

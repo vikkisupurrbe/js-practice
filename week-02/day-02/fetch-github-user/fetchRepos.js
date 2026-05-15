@@ -19,12 +19,7 @@ function fetchRepos(username) {
     headers: {
       'X-GitHub-Api-Version': '2026-03-10'
     }
-  })
-    .catch((response) => {
-      if (response.status !== 200) {
-        throw new Error(`HTTP error! Status: ${response.status}`)
-      }
-    })
+  });
 }
 
 fetchRepos("vikkisupurrbe")
@@ -40,4 +35,10 @@ fetchRepos("vikkisupurrbe")
       repos
     });
   })
-  .catch(error => console.log(error))
+  .catch(error => {
+    if (error.status === 404) {
+      console.log("User not found");
+    } else {
+      console.log(`Error: ${error.message}`);
+    }
+  })
