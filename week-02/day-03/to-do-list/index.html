@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-do List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>To-do List</h1>
+
+  <!-- Add item form -->
+  <div class="form-container">
+    <input type="text" id="name" placeholder="Item name" />
+    <button id="add-btn">Add Item</button>
+  </div>
+
+  <!-- Filter -->
+  <div class="filter-container">
+    <h2>Filter by:</h2>
+    <button id="complete-btn">Completed</button>
+    <button id="pending-btn">Not Completed</button>
+  </div>
+
+  <!-- To-do list -->
+  <div id="todo-list">
+    <div class="card">
+      <label>
+        <input type="checkbox" onclick=handleCheck()>
+      </label>
+      <div class="text-container">
+        <p>Complete daily learning</p>
+      </div>
+      <div class="card-buttons">
+        <button onclick=handleEdit()>Edit</button>
+        <button class="delete-btn" onclick=handleDelete()>Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="todoList.js"></script>
+</body>
+
+</html>
