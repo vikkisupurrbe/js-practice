@@ -26,18 +26,24 @@
 
   <!-- To-do list -->
   <div id="todo-list">
+    <!-- Rendered by renderTodos -->
     <div class="card">
       <label>
         <input type="checkbox" onclick=handleCheck()>
       </label>
       <div class="text-container">
-        <p>Complete daily learning</p>
+        <p>Sample todo item</p>
       </div>
       <div class="card-buttons">
         <button onclick=handleEdit()>Edit</button>
         <button class="delete-btn" onclick=handleDelete()>Delete</button>
       </div>
     </div>
+    <!-- Rendered by renderTodos -->
+  </div>
+
+  <div class="form-action">
+    <button id="clear-btn">Clear</button>
   </div>
 
   <script src="todoList.js"></script>

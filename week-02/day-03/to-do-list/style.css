@@ -61,7 +61,7 @@ button:hover {
   cursor: pointer;
 }
 
-/* Inventory grid */
+/* To-do List */
 #todo-list {
   display: flex;
   flex-direction: column;
@@ -109,4 +109,12 @@ button:hover {
 
 .delete-btn:hover {
   background: #e74c3c;
+}
+
+.form-action {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
