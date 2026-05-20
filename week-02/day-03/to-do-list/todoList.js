@@ -178,10 +178,32 @@ document.getElementById("clear-btn").addEventListener("click", () => {
   renderTodos(myTodos.getTodos());
 })
 
+let activeFilter = null; // null means "show all"
+
 document.getElementById("complete-btn").addEventListener("click", () => {
-  renderTodos(myTodos.filterByStatus(true));
+  if (activeFilter === "completed") {
+    // clicking active filter again — reset to show all
+    activeFilter = null;
+    document.getElementById("complete-btn").classList.remove("active-filter");
+    renderTodos(myTodos.getTodos());
+  } else {
+    activeFilter = "completed";
+    document.getElementById("complete-btn").classList.add("active-filter");
+    document.getElementById("pending-btn").classList.remove("active-filter");
+    renderTodos(myTodos.filterByStatus(true));
+  }
 })
 
 document.getElementById("pending-btn").addEventListener("click", () => {
-  renderTodos(myTodos.filterByStatus(false));
+  if (activeFilter === "pending") {
+    // clicking active filter again — reset to show all
+    activeFilter = null;
+    document.getElementById("pending-btn").classList.remove("active-filter");
+    renderTodos(myTodos.getTodos());
+  } else {
+    activeFilter = "pending";
+    document.getElementById("pending-btn").classList.add("active-filter");
+    document.getElementById("complete-btn").classList.remove("active-filter");
+    renderTodos(myTodos.filterByStatus(false));
+  }
 })
