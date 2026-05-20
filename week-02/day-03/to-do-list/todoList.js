@@ -54,9 +54,9 @@ function todoManager() {
 
   }
 
-  function editItemById(id, {name}) {
+  function editItemById(id, {task}) {
     const index = todos.findIndex((item) => item.id === id);
-    todos[index] = {...todos[index], name}
+    todos[index] = {...todos[index], task}
   }
 
   function deleteItemById(id) {
@@ -87,6 +87,7 @@ function renderTodos(items) {
   items.forEach(({ id, task, completed }) => {
     const card = document.createElement("div");
     card.className = "card";
+    card.dataset.id = id; // stamp id onto the card element itself
     card.innerHTML = `
       <label>
         <input type="checkbox" onclick=handleCheck()>
@@ -114,8 +115,27 @@ function handleCheck() {
 }
 
 function handleEdit(id) {
-  console.log(id);
-  myTodos.editItemById(id);
+  // find the speciifc card
+  const card = document.querySelector(`[data-id="${id}"]`);
+  const textContainer = card.querySelector(".text-container");
+  const editBtn = card.querySelector(".edit-btn");
+  const currentTask = textContainer.querySelector("p").textContent;
+
+  // replace <p> with <input> prefilled with current task
+  textContainer.innerHTML = `<input class="edit-input" value="${currentTask}" />`
+
+  // change button to update
+  editBtn.textContent = "Update";
+  editBtn.onclick = () => handleUpdate(id);
+}
+
+function handleUpdate(id) {
+  const card = document.querySelector(`[data-id="${id}"]`);
+  const newTask = card.querySelector(".edit-input").value;
+
+  myTodos.editItemById(id, { task: newTask });
+  myTodos.save();
+  renderTodos(myTodos.getTodos());
 }
 
 function handleDelete(id) {
