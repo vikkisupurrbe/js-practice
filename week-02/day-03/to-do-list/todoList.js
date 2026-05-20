@@ -95,7 +95,7 @@ function renderTodos(items) {
     card.dataset.id = id; // stamp id onto the card element itself
     card.innerHTML = `
       <label>
-        <input type="checkbox" class="checkbox" checked="${completed}" onclick="handleCheck(${id})">
+        <input type="checkbox" class="checkbox" ${completed ? "checked" : ""} onclick="handleCheck(${id})">
       </label>
       <div class="text-container">
         <p>${task}</p>
