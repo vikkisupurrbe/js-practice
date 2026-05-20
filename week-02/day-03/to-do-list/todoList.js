@@ -51,7 +51,7 @@ function todoManager() {
   }
 
   function filterByStatus(status) {
-    todos.filter((item) => item.completed === status);
+    return todos.filter((item) => item.completed === status);
   }
 
   function checkItemById(id, {completed}) {
@@ -179,7 +179,9 @@ document.getElementById("clear-btn").addEventListener("click", () => {
 })
 
 document.getElementById("complete-btn").addEventListener("click", () => {
-  console.log(myTodos.filterByStatus(true));
+  renderTodos(myTodos.filterByStatus(true));
 })
 
-
+document.getElementById("pending-btn").addEventListener("click", () => {
+  renderTodos(myTodos.filterByStatus(false));
+})
