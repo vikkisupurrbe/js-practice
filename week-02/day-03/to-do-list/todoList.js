@@ -56,6 +56,8 @@ function todoManager() {
   function deleteItemById(id) {
     const itemToDelete = todos.findIndex((item) => item.id === id);
     todos.splice(itemToDelete, 1);
+    JSON.parse(localStorage.getItem("todos")).splice(itemToDelete, 1);
+    save();
   }
 
   function save() {
@@ -76,7 +78,7 @@ const list = document.getElementById("todo-list");
 // Render all to-do list items
 function renderTodos(items) {
   list.innerHTML = "";
-  items.forEach(({ task, completed }) => {
+  items.forEach(({ id, task, completed }) => {
     const card = document.createElement("div");
     card.className = "card";
     card.innerHTML = `
@@ -88,7 +90,7 @@ function renderTodos(items) {
       </div>
       <div class="card-buttons">
         <button onclick="handleEdit()">Edit</button>
-        <button class="delete-btn" onclick="handleDelete()">Delete</button>
+        <button class="delete-btn" onclick="handleDelete(${id})">Delete</button>
       </div>
     `;
     list.appendChild(card);
@@ -105,8 +107,11 @@ function handleCheck() {
 
 }
 
-function handleDelete() {
-
+function handleDelete(id) {
+  myTodos.deleteItemById(id);
+  console.log(localStorage);
+  console.log(myTodos.getTodos());
+  renderTodos(myTodos.getTodos());
 }
 
 
