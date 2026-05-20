@@ -120,8 +120,6 @@ function handleCheck(id) {
   const checkbox = card.querySelector(".checkbox").checked;
   myTodos.checkItemById(id, { completed: checkbox });
   myTodos.save();
-  console.log(localStorage);
-  console.log(myTodos.getTodos());
 }
 
 function handleEdit(id) {
@@ -150,8 +148,6 @@ function handleUpdate(id) {
 
 function handleDelete(id) {
   myTodos.deleteItemById(id);
-  console.log(localStorage);
-  console.log(myTodos.getTodos());
   renderTodos(myTodos.getTodos());
 }
 
@@ -165,16 +161,12 @@ document.getElementById("add-btn").addEventListener("click", () => {
     completed: false
   })
   myTodos.save();
-  console.log(localStorage);
-  console.log(myTodos.getTodos());
   renderTodos(myTodos.getTodos());
   clearInput();
 })
 
 document.getElementById("clear-btn").addEventListener("click", () => {
   myTodos.clear();  
-  console.log(localStorage);
-  console.log(myTodos.getTodos());
   renderTodos(myTodos.getTodos());
 })
 
