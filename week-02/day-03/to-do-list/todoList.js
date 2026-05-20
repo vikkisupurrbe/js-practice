@@ -54,6 +54,11 @@ function todoManager() {
 
   }
 
+  function checkItemById(id, {completed}) {
+    const index = todos.findIndex((item) => item.id === id);
+    todos[index] = {...todos[index], completed}
+  }
+
   function editItemById(id, {task}) {
     const index = todos.findIndex((item) => item.id === id);
     todos[index] = {...todos[index], task}
@@ -75,7 +80,7 @@ function todoManager() {
     localStorage.clear();
   }
 
-  return { getTodos, add, filterByStatus, editItemById, deleteItemById, save, clear }
+  return { getTodos, add, filterByStatus, checkItemById, editItemById, deleteItemById, save, clear }
 }
 
 const myTodos = todoManager();
@@ -90,7 +95,7 @@ function renderTodos(items) {
     card.dataset.id = id; // stamp id onto the card element itself
     card.innerHTML = `
       <label>
-        <input type="checkbox" onclick=handleCheck()>
+        <input type="checkbox" class="checkbox" onclick="handleCheck(${id})">
       </label>
       <div class="text-container">
         <p>${task}</p>
@@ -110,8 +115,13 @@ function clearInput() {
 }
 
 // Actions
-function handleCheck() {
-
+function handleCheck(id) {
+  const card = document.querySelector(`[data-id="${id}"]`);
+  const checkbox = card.querySelector(".checkbox").checked;
+  myTodos.checkItemById(id, { completed: checkbox });
+  myTodos.save();
+  console.log(localStorage);
+  console.log(myTodos.getTodos());
 }
 
 function handleEdit(id) {
@@ -155,8 +165,8 @@ document.getElementById("add-btn").addEventListener("click", () => {
     completed: false
   })
   myTodos.save();
-  console.log(myTodos.getTodos());
   console.log(localStorage);
+  console.log(myTodos.getTodos());
   renderTodos(myTodos.getTodos());
   clearInput();
 })
