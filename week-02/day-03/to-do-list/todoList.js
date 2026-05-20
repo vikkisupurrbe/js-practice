@@ -50,8 +50,8 @@ function todoManager() {
     }
   }
 
-  function filterByStatus() {
-
+  function filterByStatus(status) {
+    todos.filter((item) => item.completed === status);
   }
 
   function checkItemById(id, {completed}) {
@@ -95,7 +95,7 @@ function renderTodos(items) {
     card.dataset.id = id; // stamp id onto the card element itself
     card.innerHTML = `
       <label>
-        <input type="checkbox" class="checkbox" onclick="handleCheck(${id})">
+        <input type="checkbox" class="checkbox" checked="${completed}" onclick="handleCheck(${id})">
       </label>
       <div class="text-container">
         <p>${task}</p>
@@ -177,4 +177,9 @@ document.getElementById("clear-btn").addEventListener("click", () => {
   console.log(myTodos.getTodos());
   renderTodos(myTodos.getTodos());
 })
+
+document.getElementById("complete-btn").addEventListener("click", () => {
+  console.log(myTodos.filterByStatus(true));
+})
+
 
