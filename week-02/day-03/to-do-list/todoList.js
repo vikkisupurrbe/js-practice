@@ -31,7 +31,8 @@ Data structure:
 
 function todoManager() {
   let todos = JSON.parse(localStorage.getItem("todos")) || [];
-  let nextId = 1;
+  let nextId = todos.length > 0 ? Math.max(...todos.map(task => task.id)) + 1 : 1;
+  // deriving nextId from the saved todos
 
   function getTodos() {
     return todos;
@@ -53,11 +54,16 @@ function todoManager() {
 
   }
 
+  function editItemById(id, {name}) {
+    const index = todos.findIndex((item) => item.id === id);
+    todos[index] = {...todos[index], name}
+  }
+
   function deleteItemById(id) {
-    const itemToDelete = todos.findIndex((item) => item.id === id);
-    todos.splice(itemToDelete, 1);
-    JSON.parse(localStorage.getItem("todos")).splice(itemToDelete, 1);
-    save();
+    const index = todos.findIndex((item) => item.id === id);
+    todos.splice(index, 1);
+    // JSON.parse(localStorage.getItem("todos")).splice(itemToDelete, 1);
+    save(); // already writes the current todos to localStorage
   }
 
   function save() {
@@ -69,7 +75,7 @@ function todoManager() {
     localStorage.clear();
   }
 
-  return { getTodos, add, filterByStatus, deleteItemById, save, clear }
+  return { getTodos, add, filterByStatus, editItemById, deleteItemById, save, clear }
 }
 
 const myTodos = todoManager();
@@ -89,7 +95,7 @@ function renderTodos(items) {
         <p>${task}</p>
       </div>
       <div class="card-buttons">
-        <button onclick="handleEdit()">Edit</button>
+        <button class="edit-btn" onclick="handleEdit(${id})">Edit</button>
         <button class="delete-btn" onclick="handleDelete(${id})">Delete</button>
       </div>
     `;
@@ -105,6 +111,11 @@ function clearInput() {
 // Actions
 function handleCheck() {
 
+}
+
+function handleEdit(id) {
+  console.log(id);
+  myTodos.editItemById(id);
 }
 
 function handleDelete(id) {
