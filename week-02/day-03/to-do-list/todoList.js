@@ -161,6 +161,10 @@ document.getElementById("add-btn").addEventListener("click", () => {
     completed: false
   })
   myTodos.save();
+  // prevent page reload if a status filter is selected
+  console.log(myTodos.getTodos());
+  console.log(localStorage);
+  if (activeFilter) return;
   renderTodos(myTodos.getTodos());
   clearInput();
 })
