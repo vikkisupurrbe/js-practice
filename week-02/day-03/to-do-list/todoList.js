@@ -38,7 +38,7 @@ function todoManager() {
     return todos;
   }
 
-  function add({task, completed}) {
+  function add({ task, completed }) {
     if (!task) {
       alert("An input is required!")
     } else {
@@ -54,14 +54,14 @@ function todoManager() {
     return todos.filter((item) => item.completed === status);
   }
 
-  function checkItemById(id, {completed}) {
+  function checkItemById(id, { completed }) {
     const index = todos.findIndex((item) => item.id === id);
-    todos[index] = {...todos[index], completed}
+    todos[index] = { ...todos[index], completed }
   }
 
-  function editItemById(id, {task}) {
+  function editItemById(id, { task }) {
     const index = todos.findIndex((item) => item.id === id);
-    todos[index] = {...todos[index], task}
+    todos[index] = { ...todos[index], task }
   }
 
   function deleteItemById(id) {
@@ -76,6 +76,7 @@ function todoManager() {
   }
 
   function clear() {
+    nextId = 1;
     todos = [];
     localStorage.clear();
   }
@@ -143,14 +144,19 @@ function handleUpdate(id) {
 
   myTodos.editItemById(id, { task: newTask });
   myTodos.save();
-  renderTodos(myTodos.getTodos());
+  renderCurrent();
 }
 
 function handleDelete(id) {
   myTodos.deleteItemById(id);
-  renderTodos(myTodos.getTodos());
+  renderCurrent();
 }
 
+function renderCurrent() {
+  if (activeFilter === "completed") return renderTodos(myTodos.filterByStatus(true));
+  if (activeFilter === "pending") return renderTodos(myTodos.filterByStatus(false));
+  renderTodos(myTodos.getTodos());
+}
 
 // Event handlers
 renderTodos(myTodos.getTodos());
@@ -161,16 +167,12 @@ document.getElementById("add-btn").addEventListener("click", () => {
     completed: false
   })
   myTodos.save();
-  // prevent page reload if a status filter is selected
-  console.log(myTodos.getTodos());
-  console.log(localStorage);
-  if (activeFilter) return;
-  renderTodos(myTodos.getTodos());
+  renderCurrent();
   clearInput();
 })
 
 document.getElementById("clear-btn").addEventListener("click", () => {
-  myTodos.clear();  
+  myTodos.clear();
   renderTodos(myTodos.getTodos());
 })
 
