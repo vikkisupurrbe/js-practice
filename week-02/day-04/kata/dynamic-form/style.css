@@ -38,6 +38,6 @@ tr:hover .remove-btn {
   visibility: visible;
 }
 
-.add-form-container {
+#add-form-container {
   margin-top: 1rem;
 }

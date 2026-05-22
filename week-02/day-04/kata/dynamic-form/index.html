@@ -11,7 +11,7 @@
 <body>
   <h1>User Name and Age</h1>
 
-  <!-- Form -->
+  <!-- User Table -->
   <table>
     <thead>
       <tr>
@@ -20,24 +20,17 @@
         <th scope="col" id="remove"></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="user-list">
       <!-- Rendered by renderUser -->
-      <tr>
-        <th scope="row">Chris</th>
-        <td class="age-cell">22</td>
-        <td>
-          <button class="remove-btn">−</button>
-        </td>
-      </tr>
     </tbody>
   </table>
 
   <!-- Add item form -->
-  <div class="add-form-container">
+  <form id="add-form-container">
     <input type="text" id="name" placeholder="Name" />
-    <input type="text" id="age" placeholder="Age" />
-    <button id="add-btn">+</button>
-  </div>
+    <input type="number" id="age" placeholder="Age" />
+    <button id="add-btn" type="submit">+</button>
+  </form>
 
   <div class="result-container">
     <h4 id="count">Number of users</h4>

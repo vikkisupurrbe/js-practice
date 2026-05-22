@@ -17,7 +17,7 @@ What triggers removing a field?
 How do I know which field to remove?
   - Each field has an id, the handler transmits the id to the JS logic to check the presence of the id, then removes it from the JS memory
 What triggers validation?
-  - User clicking on "Submit", <button class="submit-btn" onSubmit=handleSubmit()>, the handler will run the JS logic to check the data
+  - User clicking on "Submit", <button onclick="handleSubmit()">Submit</button>, the handler will run the JS logic to check the data
 What counts as valid?
   - Filled
   - Right data type, no number in the text field, no text in the number field
@@ -42,5 +42,81 @@ Results:
 Number of people: 4
 Average age: 35
 
+Data structure: 
+users = [
+  {
+    name: Chris,
+    age: 22
+  },
+
+    {
+    name: Chris,
+    age: 22
+  },
+]
+
 */
 
+function dynamicForm() {
+  const users = [];
+  let nextId = 1;
+
+  function getUsers() {
+    return users;
+  }
+
+  function add({ name, age }) {
+    if (name === "" || age === undefined) {
+      alert("Input cannot be empty")
+    } else {
+      users.push(
+        {
+          id: nextId++,
+          name,
+          age
+        }
+      )
+    }
+  }
+
+  return { getUsers, add }
+}
+
+const myUsers = dynamicForm();
+const list = document.getElementById("user-list");
+
+// Actions
+function renderUser(users) {
+  list.innerHTML = "";
+  users.forEach(({ id, name, age }) => {
+    const row = document.createElement("tr");
+    row.dataset.id = id;
+    row.innerHTML = `
+      <th scope="row">${name}</th>
+      <td class="age-cell">${age}</td>
+      <td>
+        <button class="remove-btn" onClick="handleDelete()">−</button>
+      </td>
+    `
+    list.appendChild(row);
+  });
+}
+
+function handleSubmit({name, age}) {
+  myUsers.add({name, age});
+}
+
+function clearInput() {
+  document.getElementById("name").value = "";
+  document.getElementById("age").value = "";
+}
+
+// Handlers
+document.getElementById("add-form-container").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const name = document.getElementById("name").value;
+  const age = document.getElementById("age").value;
+  handleSubmit({ name, age });
+  renderUser(myUsers.getUsers());
+  clearInput();
+})
