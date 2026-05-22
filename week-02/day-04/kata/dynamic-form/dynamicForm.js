@@ -66,7 +66,7 @@ function dynamicForm() {
   }
 
   function add({ name, age }) {
-    if (name === "" || age === undefined) {
+    if (name === "" || age === "") {
       alert("Input cannot be empty")
     } else {
       users.push(
@@ -84,7 +84,16 @@ function dynamicForm() {
     users.splice(index, 1);
   }
 
-  return { getUsers, add, deleteItemById }
+  function getTotalUsers() {
+    return users.length;
+  }
+
+  function getAverageAge() {
+    const totalAge = users.reduce((sum, user) => sum + Number(user.age), 0);
+    return totalAge / users.length;
+  }
+
+  return { getUsers, add, deleteItemById, getTotalUsers, getAverageAge }
 }
 
 const myUsers = dynamicForm();
@@ -107,8 +116,8 @@ function renderUser(users) {
   });
 }
 
-function handleSubmit({name, age}) {
-  myUsers.add({name, age});
+function handleSubmit({ name, age }) {
+  myUsers.add({ name, age });
 }
 
 function handleDelete(id) {
@@ -128,6 +137,8 @@ document.getElementById("add-form-container").addEventListener("submit", (e) => 
   handleSubmit({ name, age });
   renderUser(myUsers.getUsers());
   clearInput();
+  document.getElementById("count").textContent = `Number of users ${myUsers.getTotalUsers()}`
+  document.getElementById("average-age").textContent = `Average age ${String(myUsers.getAverageAge())}`
 })
 
 list.addEventListener("click", (e) => {
@@ -135,4 +146,7 @@ list.addEventListener("click", (e) => {
     const rowToDelete = e.target.closest("tr");
     rowToDelete.remove();
   }
+  document.getElementById("count").textContent = `Number of users ${myUsers.getTotalUsers()}`
+  document.getElementById("average-age").textContent = `Average age ${String(myUsers.getAverageAge())}`
 })
+
