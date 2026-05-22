@@ -73,7 +73,7 @@ function dynamicForm() {
         {
           id: nextId++,
           name,
-          age
+          age: Number(age)
         }
       )
     }
@@ -110,19 +110,11 @@ function renderUser(users) {
       <th scope="row">${name}</th>
       <td class="age-cell">${age}</td>
       <td>
-        <button class="remove-btn" onClick="handleDelete(${id})">−</button>
+        <button class="remove-btn"})">−</button>
       </td>
     `
     list.appendChild(row);
   });
-}
-
-function handleSubmit({ name, age }) {
-  myUsers.add({ name, age });
-}
-
-function handleDelete(id) {
-  myUsers.deleteItemById(id);
 }
 
 function clearInput() {
@@ -134,8 +126,8 @@ function clearInput() {
 document.getElementById("add-form-container").addEventListener("submit", (e) => {
   e.preventDefault();
   const name = document.getElementById("name").value;
-  const age = Number(document.getElementById("age").value);
-  handleSubmit({ name, age });
+  const age = document.getElementById("age").value;
+  myUsers.add({ name, age });
   renderUser(myUsers.getUsers());
   clearInput();
   // Dynamic result rendering
@@ -144,8 +136,11 @@ document.getElementById("add-form-container").addEventListener("submit", (e) => 
 })
 
 list.addEventListener("click", (e) => {
+  // Event delegation
   if (e.target.classList.contains("remove-btn")) {
     const rowToDelete = e.target.closest("tr");
+    const id = Number(rowToDelete.dataset.id);
+    myUsers.deleteItemById(id);
     rowToDelete.remove();
   }
   // Dynamic result rendering
