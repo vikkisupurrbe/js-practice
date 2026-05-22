@@ -32,7 +32,7 @@ const binaryArrayToNumber1 = arr => {
   return result;
 };
 
-console.log(binaryArrayToNumber1([0, 0, 1, 0])); // expected 2, get 0
+console.log(binaryArrayToNumber1([0, 0, 1, 0])); // expected 2, get 2
 console.log(binaryArrayToNumber1([1, 0, 0, 1])); // expected 9, get 9
 
 function binaryArrayToNumber2(arr) {

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Name and Age</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>User Name and Age</h1>
+
+  <!-- Form -->
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col" id="remove"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Rendered by renderUser -->
+      <tr>
+        <th scope="row">Chris</th>
+        <td class="age-cell">22</td>
+        <td>
+          <button class="remove-btn">−</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Add item form -->
+  <div class="add-form-container">
+    <input type="text" id="name" placeholder="Name" />
+    <input type="text" id="age" placeholder="Age" />
+    <button id="add-btn">+</button>
+  </div>
+
+  <div class="result-container">
+    <h4 id="count">Number of users</h4>
+    <h4 id="average-age">Average age</h4>
+  </div>
+
+  <script src="dynamicForm.js"></script>
+</body>
+
+</html>
