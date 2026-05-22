@@ -89,7 +89,8 @@ function dynamicForm() {
   }
 
   function getAverageAge() {
-    const totalAge = users.reduce((sum, user) => sum + Number(user.age), 0);
+    if (users.length === 0) return 0;
+    const totalAge = users.reduce((sum, user) => sum + user.age, 0);
     return totalAge / users.length;
   }
 
@@ -133,10 +134,11 @@ function clearInput() {
 document.getElementById("add-form-container").addEventListener("submit", (e) => {
   e.preventDefault();
   const name = document.getElementById("name").value;
-  const age = document.getElementById("age").value;
+  const age = Number(document.getElementById("age").value);
   handleSubmit({ name, age });
   renderUser(myUsers.getUsers());
   clearInput();
+  // Dynamic result rendering
   document.getElementById("count").textContent = `Number of users ${myUsers.getTotalUsers()}`
   document.getElementById("average-age").textContent = `Average age ${String(myUsers.getAverageAge())}`
 })
@@ -146,6 +148,7 @@ list.addEventListener("click", (e) => {
     const rowToDelete = e.target.closest("tr");
     rowToDelete.remove();
   }
+  // Dynamic result rendering
   document.getElementById("count").textContent = `Number of users ${myUsers.getTotalUsers()}`
   document.getElementById("average-age").textContent = `Average age ${String(myUsers.getAverageAge())}`
 })
