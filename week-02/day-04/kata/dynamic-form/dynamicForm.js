@@ -79,7 +79,12 @@ function dynamicForm() {
     }
   }
 
-  return { getUsers, add }
+  function deleteItemById(id) {
+    const index = users.findIndex((item) => item.id === id);
+    users.splice(index, 1);
+  }
+
+  return { getUsers, add, deleteItemById }
 }
 
 const myUsers = dynamicForm();
@@ -95,7 +100,7 @@ function renderUser(users) {
       <th scope="row">${name}</th>
       <td class="age-cell">${age}</td>
       <td>
-        <button class="remove-btn" onClick="handleDelete()">−</button>
+        <button class="remove-btn" onClick="handleDelete(${id})">−</button>
       </td>
     `
     list.appendChild(row);
@@ -104,6 +109,10 @@ function renderUser(users) {
 
 function handleSubmit({name, age}) {
   myUsers.add({name, age});
+}
+
+function handleDelete(id) {
+  myUsers.deleteItemById(id);
 }
 
 function clearInput() {
@@ -119,4 +128,11 @@ document.getElementById("add-form-container").addEventListener("submit", (e) => 
   handleSubmit({ name, age });
   renderUser(myUsers.getUsers());
   clearInput();
+})
+
+list.addEventListener("click", (e) => {
+  if (e.target.classList.contains("remove-btn")) {
+    const rowToDelete = e.target.closest("tr");
+    rowToDelete.remove();
+  }
 })
