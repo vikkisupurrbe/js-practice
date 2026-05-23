@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnimeQ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>Welcome to AnimeQ</h1>
+
+  <div class="settings-container">
+
+    <!-- Number of questions -->
+    <p>Number of questions: 5</p>
+
+    <!-- Difficulty -->
+    <div class="difficulty-container">
+      <button id="easy-btn">Easy</button>
+      <button id="medium-btn">Medium</button>
+      <button id="hard-btn">Hard</button>
+    </div>
+
+    <!-- Type of questions -->
+    <p>Type of questions: Multiple Choice</p>
+
+    <div>
+      <button id="play-btn">Play</button>
+    </div>
+
+  </div>
+
+
+  <!-- Tracker -->
+  <div class="tracker-container">
+    <div class="number-tracker">
+      <h3>Time Left</h3>
+      <span id="time">10</span>
+    </div>
+    <div class="number-tracker">
+      <h3>Your Score</h3>
+      <span id="score">0</span>
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <!-- Rendered by renderQuizzes -->
+  <div id="question-container">
+    <h3 id="question">Question</h3>
+    <div id="options-container">
+      <div class="option-body">
+        <input type="radio" id="option-a" name="choice" value="1">
+        <label for="option-a">A</label>
+        <p id="option">Option A</p>
+      </div>
+      <div class="option-body">
+        <input type="radio" id="option-b" name="choice" value="1">
+        <label for="option-b">B</label>
+        <p id="option">Option B</p>
+      </div>
+      <div class="option-body">
+        <input type="radio" id="option-c" name="choice" value="1">
+        <label for="option-c">C</label>
+        <p id="option">Option C</p>
+      </div>
+      <div class="option-body">
+        <input type="radio" id="option-d" name="choice" value="1">
+        <label for="option-d">D</label>
+        <p id="option">Option D</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="quizApp.js"></script>
+</body>
+
+</html>
