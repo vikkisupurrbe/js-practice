@@ -8,10 +8,12 @@ body {
   font-family: sans-serif;
   max-width: 900px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 4rem;
 }
 
-h1 {
+.title {
+  display: flex;
+  justify-content: center;
   margin-bottom: 1.5rem;
 }
 
@@ -28,10 +30,8 @@ h1 {
 .difficulty-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 1rem;
 }
 
 button {
@@ -86,6 +86,13 @@ button:hover {
   flex-direction: row;
   gap: 1rem;
   margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+#time, #score {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
 }
 
 /* Quiz */
@@ -103,11 +110,18 @@ input {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
+  justify-content: flex-start;
+  gap: 1rem;
 }
 
-.text-container {
+.option-body {
   display: flex;
-  flex-grow: 1;
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.option {
+  display: flex;
+  flex-grow: 2;
 }
