@@ -55,19 +55,69 @@ Sample response.json()
 
 */
 
-async function fetchQuiz() {
+async function fetchQuiz(level) {
   let quiz = [];
+  let url = "";
+  level = difficulty
+  console.log(level);
 
-  try {
-    const url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=easy&type=multiple"
-    let response = await fetch(url);
-    let data = await response.json()
-    quiz = data.results;
-    console.log(quiz);
-  } catch (err) {
-    console.log(err);
+
+  if (level === "") alert("Please select a difficulty level!")
+
+  if (level === "easy") {
+    try {
+      url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=easy&type=multiple"
+      let response = await fetch(url);
+      let data = await response.json()
+      quiz = data.results;
+      console.log(quiz);
+    } catch (err) {
+      console.log(err);
+    }
   }
+
+  if (level === "medium") {
+    try {
+      url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=medium&type=multiple"
+      let response = await fetch(url);
+      let data = await response.json()
+      quiz = data.results;
+      console.log(quiz);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  if (level === "hard") {
+    try {
+      url = "https://opentdb.com/api.php?amount=5&category=31&difficulty=hard&type=multiple"
+      let response = await fetch(url);
+      let data = await response.json()
+      quiz = data.results;
+      console.log(quiz);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
 }
 
-fetchQuiz();
 
+// DOM Events
+// Set difficulty
+let difficulty = ""
+
+document.getElementById("easy-btn").addEventListener("click", () => {
+  difficulty = "easy";
+})
+document.getElementById("medium-btn").addEventListener("click", () => {
+  difficulty = "medium";
+})
+document.getElementById("hard-btn").addEventListener("click", () => {
+  difficulty = "hard";
+})
+
+// Fetch quiz
+document.getElementById("play-btn").addEventListener("click", () => {
+  fetchQuiz();
+})
