@@ -62,7 +62,10 @@ async function fetchQuiz(level) {
   console.log(level);
 
 
-  if (level === "") alert("Please select a difficulty level!");
+  if (level === "") {
+    alert("Please select a difficulty level!")
+    return;
+  };
 
   try {
     url = `https://opentdb.com/api.php?amount=5&category=31&difficulty=${level}&type=multiple`
@@ -83,13 +86,14 @@ let difficulty = ""
 let activeFilter = null;
 
 document.getElementById("easy-btn").addEventListener("click", () => {
-  difficulty = "easy";
   if (activeFilter === "easy") {
     // clicking active filter again — reset to show all
     activeFilter = null;
+    difficulty = "";
     document.getElementById("easy-btn").classList.remove("active-filter");
   } else {
     activeFilter = "easy";
+    difficulty = "easy";
     document.getElementById("easy-btn").classList.add("active-filter");
     document.getElementById("medium-btn").classList.remove("active-filter");
     document.getElementById("hard-btn").classList.remove("active-filter");
@@ -100,9 +104,11 @@ document.getElementById("medium-btn").addEventListener("click", () => {
   if (activeFilter === "medium") {
     // clicking active filter again — reset to show all
     activeFilter = null;
+    difficulty = "";
     document.getElementById("medium-btn").classList.remove("active-filter");
   } else {
     activeFilter = "medium";
+    difficulty = "medium";
     document.getElementById("medium-btn").classList.add("active-filter");
     document.getElementById("easy-btn").classList.remove("active-filter");
     document.getElementById("hard-btn").classList.remove("active-filter");
@@ -113,9 +119,11 @@ document.getElementById("hard-btn").addEventListener("click", () => {
   if (activeFilter === "hard") {
     // clicking active filter again — reset to show all
     activeFilter = null;
+    difficulty = "";
     document.getElementById("hard-btn").classList.remove("active-filter");
   } else {
     activeFilter = "hard";
+    difficulty = "hard";
     document.getElementById("hard-btn").classList.add("active-filter");
     document.getElementById("easy-btn").classList.remove("active-filter");
     document.getElementById("medium-btn").classList.remove("active-filter");
