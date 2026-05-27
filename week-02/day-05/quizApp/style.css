@@ -80,7 +80,7 @@ button:hover {
 
 
 /* Tracker */
-.tracker-container {
+#tracker-container {
   display: flex;
   justify-content: space-between;
   flex-direction: row;

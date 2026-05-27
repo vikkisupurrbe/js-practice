@@ -59,8 +59,6 @@ async function fetchQuiz(level) {
   let quiz = [];
   let url = "";
   level = difficulty
-  console.log(level);
-
 
   if (level === "") {
     alert("Please select a difficulty level!")
@@ -76,9 +74,24 @@ async function fetchQuiz(level) {
   } catch (err) {
     console.log(err);
   }
-
 }
 
+/*-------- Action --------*/
+function renderTrackers() {
+  if (difficulty) {
+    const container = document.getElementById("tracker-container");
+    container.innerHTML = `
+      <div class="number-tracker">
+        <h3>Time Left</h3>
+        <div id="time">10</div>
+      </div>
+      <div class="number-tracker">
+        <h3>Your Score</h3>
+        <div id="score">0</div>
+      </div>
+    `
+  }
+}
 
 /*-------- DOM Events --------*/
 // Set difficulty
@@ -133,4 +146,5 @@ document.getElementById("hard-btn").addEventListener("click", () => {
 // Fetch quiz
 document.getElementById("play-btn").addEventListener("click", () => {
   fetchQuiz();
+  renderTrackers();
 })
