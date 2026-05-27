@@ -77,18 +77,49 @@ async function fetchQuiz(level) {
 }
 
 
-// DOM Events
+/*-------- DOM Events --------*/
 // Set difficulty
 let difficulty = ""
+let activeFilter = null;
 
 document.getElementById("easy-btn").addEventListener("click", () => {
   difficulty = "easy";
+  if (activeFilter === "easy") {
+    // clicking active filter again — reset to show all
+    activeFilter = null;
+    document.getElementById("easy-btn").classList.remove("active-filter");
+  } else {
+    activeFilter = "easy";
+    document.getElementById("easy-btn").classList.add("active-filter");
+    document.getElementById("medium-btn").classList.remove("active-filter");
+    document.getElementById("hard-btn").classList.remove("active-filter");
+  }
 })
 document.getElementById("medium-btn").addEventListener("click", () => {
   difficulty = "medium";
+  if (activeFilter === "medium") {
+    // clicking active filter again — reset to show all
+    activeFilter = null;
+    document.getElementById("medium-btn").classList.remove("active-filter");
+  } else {
+    activeFilter = "medium";
+    document.getElementById("medium-btn").classList.add("active-filter");
+    document.getElementById("easy-btn").classList.remove("active-filter");
+    document.getElementById("hard-btn").classList.remove("active-filter");
+  }
 })
 document.getElementById("hard-btn").addEventListener("click", () => {
   difficulty = "hard";
+  if (activeFilter === "hard") {
+    // clicking active filter again — reset to show all
+    activeFilter = null;
+    document.getElementById("hard-btn").classList.remove("active-filter");
+  } else {
+    activeFilter = "hard";
+    document.getElementById("hard-btn").classList.add("active-filter");
+    document.getElementById("easy-btn").classList.remove("active-filter");
+    document.getElementById("medium-btn").classList.remove("active-filter");
+  }
 })
 
 // Fetch quiz
