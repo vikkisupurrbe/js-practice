@@ -81,12 +81,17 @@ function timer() {
 
   function elapsedTime() { return `${counter}` };
 
-  function start(display) {
+  function start(display, onExpire) {
     running = true;
 
     intervalID = setInterval(() => {
       counter -= 1;
       display.textContent = elapsedTime();
+      if (counter <= 0) {
+        stop();
+        if (onExpire) onExpire();
+        // defensive guard for an optional callback, call when provided by the caller
+      }
     }, 1000);
   }
 
@@ -127,21 +132,24 @@ function renderTrackers() {
   }
 }
 
+let currentIndex = 0;
+let questions = [];
+
 async function renderQuestion(level) {
-  const questions = await fetchQuiz(level);
+  questions = await fetchQuiz(level);
   const container = document.getElementById("question-container");
-  const timeLeft = Number(countdown.elapsedTime());
 
   if (!questions) return;
-  // render the first question
-  // timer starts countdown
-  // when timer is at 0, render the next question
-  // exit after the last question
-  let i = 0;
-  while (i < questions.length && timeLeft >= 0) {
+  currentIndex = 0;
+  showQuestion(currentIndex);
 
-    const { question, correct_answer, incorrect_answers } = questions[i];
+  function showQuestion(index) {
+    if (index >= questions.length) {
+      // quiz over — show results
+      return;
+    }
 
+    const { question, correct_answer, incorrect_answers } = questions[index];
     // insert the correct answer randomly to make an answers array
     const randomIndex = Math.floor(Math.random() * (incorrect_answers.length + 1));
     const answers = [...incorrect_answers];
@@ -179,11 +187,15 @@ async function renderQuestion(level) {
         </div>
       </div>
     `;
-
-    if (timeLeft < 0) {
-      countdown.reset();
-      i++;
-    }
+    
+    countdown.reset();
+    countdown.start(
+      document.getElementById("time"),
+      () => {
+        currentIndex++;
+        showQuestion(currentIndex);
+      }
+    )
   }
 
   console.log(questions);
