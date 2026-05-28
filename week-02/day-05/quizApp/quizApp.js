@@ -141,7 +141,8 @@ async function renderQuestion(level) {
   // insert the correct answer randomly to make an answers array
   const randomIndex = Math.floor(Math.random() * (incorrect_answers.length + 1));
   console.log([...incorrect_answers], randomIndex, correct_answer);
-  const answers = [...incorrect_answers].splice(randomIndex, 0, correct_answer);
+  const answers = [...incorrect_answers];
+  answers.splice(randomIndex, 0, correct_answer);
   console.log(answers);
   container.innerHTML = `
     <h3 id="question">${question}</h3>
