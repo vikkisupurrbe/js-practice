@@ -87,7 +87,7 @@ function timer() {
     intervalID = setInterval(() => {
       counter -= 1;
       display.textContent = elapsedTime();
-      if (counter <= 0) {
+      if (counter < 0) {
         stop();
         if (onExpire) onExpire();
         // defensive guard for an optional callback, call when provided by the caller
@@ -102,12 +102,12 @@ function timer() {
     return elapsedTime();
   }
 
-  function reset() {
+  function reset(display) {
     clearInterval(intervalID);
     intervalID = 0;
     running = false;
     counter = 10;
-    return elapsedTime();
+    if (display) display.textContent = "10";
   }
 
   return { elapsedTime, start, stop, reset }
@@ -127,8 +127,14 @@ function renderTrackers() {
         <div id="score">0</div>
       </div>
     `
-    const time = document.getElementById("time");
-    countdown.start(time);
+    /*
+    renderTrackers calls countdown.start(time) — that starts the first interval. Then showQuestion calls countdown.reset() then countdown.start(time, onExpire) — that starts a second interval. 
+    
+    Now two intervals are decrementing counter simultaneously, so it counts down twice as fast and hits 0 almost immediately.
+    
+    When onExpire fires, showQuestion calls countdown.reset() which sets counter back to 10 — but the display document.getElementById("time") still shows whatever the two racing intervals left it at.
+
+    */
   }
 }
 
@@ -138,6 +144,7 @@ let questions = [];
 async function renderQuestion(level) {
   questions = await fetchQuiz(level);
   const container = document.getElementById("question-container");
+  const timeDisplay = document.getElementById("time");
 
   if (!questions) return;
   currentIndex = 0;
@@ -188,17 +195,15 @@ async function renderQuestion(level) {
       </div>
     `;
     
-    countdown.reset();
+    countdown.reset(timeDisplay);
     countdown.start(
-      document.getElementById("time"),
+      timeDisplay,
       () => {
         currentIndex++;
         showQuestion(currentIndex);
       }
-    )
+    );
   }
-
-  console.log(questions);
 }
 
 /*-------- DOM Events --------*/
