@@ -105,7 +105,7 @@ function timer() {
     return elapsedTime();
   }
 
-  return { start, stop, reset }
+  return { elapsedTime, start, stop, reset }
 }
 
 /*-------- Action --------*/
@@ -130,54 +130,61 @@ function renderTrackers() {
 async function renderQuestion(level) {
   const questions = await fetchQuiz(level);
   const container = document.getElementById("question-container");
+  const timeLeft = Number(countdown.elapsedTime());
 
   if (!questions) return;
   // render the first question
   // timer starts countdown
   // when timer is at 0, render the next question
   // exit after the last question
-  const { question, correct_answer, incorrect_answers } = questions[0];
-  
-  // insert the correct answer randomly to make an answers array
-  const randomIndex = Math.floor(Math.random() * (incorrect_answers.length + 1));
-  console.log([...incorrect_answers], randomIndex, correct_answer);
-  const answers = [...incorrect_answers];
-  answers.splice(randomIndex, 0, correct_answer);
-  console.log(answers);
-  container.innerHTML = `
-    <h3 id="question">${question}</h3>
-    <div id="options-container">
-      <div class="option-body">
-        <div>
-          <input type="radio" class="radio-btn" id="option-a" name="choice" value="1">
-          <label for="option-a">A</label>
+  let i = 0;
+  while (i < questions.length && timeLeft >= 0) {
+
+    const { question, correct_answer, incorrect_answers } = questions[i];
+
+    // insert the correct answer randomly to make an answers array
+    const randomIndex = Math.floor(Math.random() * (incorrect_answers.length + 1));
+    const answers = [...incorrect_answers];
+    answers.splice(randomIndex, 0, correct_answer);
+    container.innerHTML = `
+      <h3 id="question">${question}</h3>
+      <div id="options-container">
+        <div class="option-body">
+          <div>
+            <input type="radio" class="radio-btn" id="option-a" name="choice" value="1">
+            <label for="option-a">A</label>
+          </div>
+          <p class="option">${answers[0]}</p>
         </div>
-        <p class="option">${answers[0]}</p>
-      </div>
-      <div class="option-body">
-        <div>
-          <input type="radio" class="radio-btn" id="option-b" name="choice" value="1">
-          <label for="option-b">B</label>
+        <div class="option-body">
+          <div>
+            <input type="radio" class="radio-btn" id="option-b" name="choice" value="1">
+            <label for="option-b">B</label>
+          </div>
+          <p class="option">${answers[1]}</p>
         </div>
-        <p class="option">${answers[1]}</p>
-      </div>
-      <div class="option-body">
-        <div>
-          <input type="radio" class="radio-btn" id="option-c" name="choice" value="1">
-          <label for="option-c">C</label>
+        <div class="option-body">
+          <div>
+            <input type="radio" class="radio-btn" id="option-c" name="choice" value="1">
+            <label for="option-c">C</label>
+          </div>
+          <p class="option">${answers[2]}</p>
         </div>
-        <p class="option">${answers[2]}</p>
-      </div>
-      <div class="option-body">
-        <div>
-          <input type="radio" class="radio-btn" id="option-d" name="choice" value="1">
-          <label for="option-d">D</label>
+        <div class="option-body">
+          <div>
+            <input type="radio" class="radio-btn" id="option-d" name="choice" value="1">
+            <label for="option-d">D</label>
+          </div>
+          <p class="option">${answers[3]}</p>
         </div>
-        <p class="option">${answers[3]}</p>
       </div>
-    </div>
-  `;
- 
+    `;
+
+    if (timeLeft < 0) {
+      countdown.reset();
+      i++;
+    }
+  }
 
   console.log(questions);
 }
