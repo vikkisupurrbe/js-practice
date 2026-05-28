@@ -56,10 +56,6 @@ Sample response.json()
 */
 
 async function fetchQuiz(level) {
-  let quiz = [];
-  let url = "";
-  level = difficulty
-
   if (level === "") {
     alert("Please select a difficulty level!")
     return;
@@ -69,11 +65,47 @@ async function fetchQuiz(level) {
     url = `https://opentdb.com/api.php?amount=5&category=31&difficulty=${level}&type=multiple`
     let response = await fetch(url);
     let data = await response.json()
-    quiz = data.results;
-    console.log(quiz);
+    return data.results;
   } catch (err) {
     console.log(err);
   }
+}
+
+
+const countdown = timer();
+
+function timer() {
+  let intervalID = 0;
+  let counter = 10;
+  let running = false;
+
+  function elapsedTime() { return `${counter}` };
+
+  function start(display) {
+    running = true;
+
+    intervalID = setInterval(() => {
+      counter -= 1;
+      display.textContent = elapsedTime();
+    }, 1000);
+  }
+
+  function stop() {
+    clearInterval(intervalID);
+    intervalID = 0;
+    running = false;
+    return elapsedTime();
+  }
+
+  function reset() {
+    clearInterval(intervalID);
+    intervalID = 0;
+    running = false;
+    counter = 10;
+    return elapsedTime();
+  }
+
+  return { start, stop, reset }
 }
 
 /*-------- Action --------*/
@@ -90,7 +122,24 @@ function renderTrackers() {
         <div id="score">0</div>
       </div>
     `
+    const time = document.getElementById("time");
+    countdown.start(time);
   }
+}
+
+async function renderQuestion(level) {
+  const questions = await fetchQuiz(level);
+  if (!questions) return;
+
+  // render the first question
+  // timer starts countdown
+  // when timer is at 0, render the next question
+  // exit after the last question
+  questions.forEach(({ question, correct_answer, incorrect_answers }) => {
+
+  });
+
+  console.log(questions);
 }
 
 /*-------- DOM Events --------*/
@@ -145,6 +194,6 @@ document.getElementById("hard-btn").addEventListener("click", () => {
 
 // Fetch quiz
 document.getElementById("play-btn").addEventListener("click", () => {
-  fetchQuiz();
+  renderQuestion(difficulty);
   renderTrackers();
 })
