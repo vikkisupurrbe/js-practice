@@ -1,12 +1,12 @@
 /*
 
 Build a **JS quiz game** in the browser: 
- - fetch questions from Open Trivia API, 
- - show one at a time, 
- - track score, 
- - timer per question, 
- - difficulty selector, 
- - "play again" button. 
+[x] - fetch questions from Open Trivia API, 
+[x] - show one at a time, 
+[ ] - track score, 
+[x] - timer per question, 
+[x] - difficulty selector, 
+[ ] - "play again" button. 
 
 Uses async/await, DOM, ES6+.
 
@@ -141,6 +141,16 @@ function renderTrackers() {
 let currentIndex = 0;
 let questions = [];
 
+function renderScore() {
+// 0 when first rendered
+// render at the end of each question
+// only add 20 points if the answer is correct
+}
+
+function handleChoice(userAnswer) {
+  console.log(userAnswer);
+}
+
 async function renderQuestion(level) {
   questions = await fetchQuiz(level);
   const container = document.getElementById("question-container");
@@ -166,7 +176,7 @@ async function renderQuestion(level) {
       <div id="options-container">
         <div class="option-body">
           <div>
-            <input type="radio" class="radio-btn" id="option-a" name="choice" value="1">
+            <input type="radio" class="radio-btn" onclick="handleChoice(${answers[0]})" id="option-a" name="choice" value="1">
             <label for="option-a">A</label>
           </div>
           <p class="option">${answers[0]}</p>
