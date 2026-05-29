@@ -176,28 +176,28 @@ async function renderQuestion(level) {
       <div id="options-container">
         <div class="option-body">
           <div>
-            <input type="radio" class="radio-btn" onclick="handleChoice(${answers[0]})" id="option-a" name="choice" value="1">
+            <input type="radio" class="radio-btn" data-answer="${answers[0]}" id="option-a" name="choice" value="1">
             <label for="option-a">A</label>
           </div>
           <p class="option">${answers[0]}</p>
         </div>
         <div class="option-body">
           <div>
-            <input type="radio" class="radio-btn" id="option-b" name="choice" value="1">
+            <input type="radio" class="radio-btn" data-answer="${answers[1]} id="option-b" name="choice" value="1">
             <label for="option-b">B</label>
           </div>
           <p class="option">${answers[1]}</p>
         </div>
         <div class="option-body">
           <div>
-            <input type="radio" class="radio-btn" id="option-c" name="choice" value="1">
+            <input type="radio" class="radio-btn" data-answer="${answers[2]} id="option-c" name="choice" value="1">
             <label for="option-c">C</label>
           </div>
           <p class="option">${answers[2]}</p>
         </div>
         <div class="option-body">
           <div>
-            <input type="radio" class="radio-btn" id="option-d" name="choice" value="1">
+            <input type="radio" class="radio-btn" data-answer="${answers[3]} id="option-d" name="choice" value="1">
             <label for="option-d">D</label>
           </div>
           <p class="option">${answers[3]}</p>
@@ -217,6 +217,12 @@ async function renderQuestion(level) {
 }
 
 /*-------- DOM Events --------*/
+// Fetch quiz
+document.getElementById("play-btn").addEventListener("click", () => {
+  renderQuestion(difficulty);
+  renderTrackers();
+})
+
 // Set difficulty
 let difficulty = ""
 let activeFilter = null;
@@ -266,8 +272,10 @@ document.getElementById("hard-btn").addEventListener("click", () => {
   }
 })
 
-// Fetch quiz
-document.getElementById("play-btn").addEventListener("click", () => {
-  renderQuestion(difficulty);
-  renderTrackers();
+// Register user answer
+document.getElementById("question-container").addEventListener("change", (e) => {
+  if (e.target.classList.contains("radio-btn")) {
+    const userAnswer = e.target.dataset.answer;
+    handleChoice(userAnswer);
+  }
 })
