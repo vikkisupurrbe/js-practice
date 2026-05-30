@@ -3,7 +3,7 @@
 Build a **JS quiz game** in the browser: 
 [x] - fetch questions from Open Trivia API, 
 [x] - show one at a time, 
-[ ] - track score, 
+[x] - track score, 
 [x] - timer per question, 
 [x] - difficulty selector, 
 [ ] - "play again" button. 
@@ -140,28 +140,19 @@ function renderTrackers() {
 
 let currentIndex = 0;
 let questions = [];
-let currentAnswer;
+let selectedAnswer = null;
 
-function handleChoice(userAnswer) {
-  const currentQuestion = questions[currentIndex];
-  console.log(`Correct answer: ${currentQuestion.correct_answer}`);
-  console.log(`User answer correct? ${userAnswer === currentQuestion.correct_answer}`);
-  if (userAnswer === currentQuestion.correct_answer) {
-    currentAnswer = true;
-  } else {
-    currentAnswer = false;
-  }
+function handleChoice(userAnswer, correctAnswer) {
+  return userAnswer === correctAnswer;
 }
 
-function renderScore() {
-// 0 when first rendered
-// render at the end of each question
-// only add 20 points if the answer is correct
+function renderScore(isCorrect) {
+  // 0 when first rendered
+  // render when the next question is showed
+  // only add 20 points if the answer is correct
+  if(!isCorrect) return;
   const scoreDisplay = document.getElementById("score");
-  console.log(`Score: ${scoreDisplay.textContent}`);
-  console.log(currentAnswer);
-  if (currentAnswer === true) scoreDisplay.textContent = `${Number(scoreDisplay.textContent) + 20}`
-  console.log(`Score: ${scoreDisplay.textContent}`);
+  scoreDisplay.textContent = `${Number(scoreDisplay.textContent) + 20}`;
 }
 
 async function renderQuestion(level) {
@@ -222,7 +213,10 @@ async function renderQuestion(level) {
     countdown.start(
       timeDisplay,
       () => {
-        renderScore();
+        const correctAnswer = questions[currentIndex].correct_answer;
+        const isCorrect = handleChoice(selectedAnswer, correctAnswer);
+        renderScore(isCorrect);
+        selectedAnswer = null;
         currentIndex++;
         showQuestion(currentIndex);
       }
@@ -289,7 +283,6 @@ document.getElementById("hard-btn").addEventListener("click", () => {
 // Register user answer
 document.getElementById("question-container").addEventListener("change", (e) => {
   if (e.target.classList.contains("radio-btn")) {
-    const userAnswer = e.target.dataset.answer;
-    handleChoice(userAnswer);
+    selectedAnswer = e.target.dataset.answer; // event listener stores the selection locally
   }
 })
