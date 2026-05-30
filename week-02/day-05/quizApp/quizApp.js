@@ -6,7 +6,7 @@ Build a **JS quiz game** in the browser:
 [x] - track score, 
 [x] - timer per question, 
 [x] - difficulty selector, 
-[ ] - "play again" button. 
+[x] - "play again" button. 
 
 Uses async/await, DOM, ES6+.
 
