@@ -140,15 +140,28 @@ function renderTrackers() {
 
 let currentIndex = 0;
 let questions = [];
+let currentAnswer;
+
+function handleChoice(userAnswer) {
+  const currentQuestion = questions[currentIndex];
+  console.log(`Correct answer: ${currentQuestion.correct_answer}`);
+  console.log(`User answer correct? ${userAnswer === currentQuestion.correct_answer}`);
+  if (userAnswer === currentQuestion.correct_answer) {
+    currentAnswer = true;
+  } else {
+    currentAnswer = false;
+  }
+}
 
 function renderScore() {
 // 0 when first rendered
 // render at the end of each question
 // only add 20 points if the answer is correct
-}
-
-function handleChoice(userAnswer) {
-  console.log(userAnswer);
+  const scoreDisplay = document.getElementById("score");
+  console.log(`Score: ${scoreDisplay.textContent}`);
+  console.log(currentAnswer);
+  if (currentAnswer === true) scoreDisplay.textContent = `${Number(scoreDisplay.textContent) + 20}`
+  console.log(`Score: ${scoreDisplay.textContent}`);
 }
 
 async function renderQuestion(level) {
@@ -183,21 +196,21 @@ async function renderQuestion(level) {
         </div>
         <div class="option-body">
           <div>
-            <input type="radio" class="radio-btn" data-answer="${answers[1]} id="option-b" name="choice" value="1">
+            <input type="radio" class="radio-btn" data-answer="${answers[1]}" id="option-b" name="choice" value="1">
             <label for="option-b">B</label>
           </div>
           <p class="option">${answers[1]}</p>
         </div>
         <div class="option-body">
           <div>
-            <input type="radio" class="radio-btn" data-answer="${answers[2]} id="option-c" name="choice" value="1">
+            <input type="radio" class="radio-btn" data-answer="${answers[2]}" id="option-c" name="choice" value="1">
             <label for="option-c">C</label>
           </div>
           <p class="option">${answers[2]}</p>
         </div>
         <div class="option-body">
           <div>
-            <input type="radio" class="radio-btn" data-answer="${answers[3]} id="option-d" name="choice" value="1">
+            <input type="radio" class="radio-btn" data-answer="${answers[3]}" id="option-d" name="choice" value="1">
             <label for="option-d">D</label>
           </div>
           <p class="option">${answers[3]}</p>
@@ -209,6 +222,7 @@ async function renderQuestion(level) {
     countdown.start(
       timeDisplay,
       () => {
+        renderScore();
         currentIndex++;
         showQuestion(currentIndex);
       }
