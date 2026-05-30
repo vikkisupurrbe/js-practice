@@ -166,8 +166,8 @@ async function renderQuestion(level) {
 
   function showQuestion(index) {
     if (index >= questions.length) {
-      // quiz over — show results
-      return;
+      // quiz over
+      document.getElementById("play-btn").textContent = "Play Again";
     }
 
     const { question, correct_answer, incorrect_answers } = questions[index];
