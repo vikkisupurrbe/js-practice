@@ -16,40 +16,43 @@
     <title>my NBA Website</title>
     <link rel="stylesheet" href="style.css">
   </head>
-  
+
   <body>
     <h1>My NBA Website</h1>
-  
+
     <nav class="menu">
-      <ul>
-        <li><img src="basketball-solid.png" id="logo" alt="A basketball icon"></li>
-        <li><a ref="#">News</a></li>
-        <li><a ref="#">Schedule</a></li>
-        <li><a ref="#">Standings</a></li>
-        <li><a ref="#">Stats</a></li>
-        <li><a ref="#">Teams</a></li>
+      <img src="basketball-solid.png" id="logo" alt="A basketball icon">
+      <img src="bars-solid.png" id="hamburger" alt="A hamburger icon">
+      <ul id="nav-links">
+        <li><a href="news.html">News</a></li>
+        <li><a href="schedule.html">Schedule</a></li>
+        <li><a href="stats.html">Stats</a></li>
+        <li><a href="teams.html">Teams</a></li>
       </ul>
     </nav>
-  
-    <div>
+
+    <div id="players-section">
       <h2>Favorite Players</h2>
     </div>
-  
+
     <div class="cards-container">
       <div class="players">
         <h4 class="name">Victor Wembanyama</h4>
         <p class="team">San Antonio Spurs</p>
       </div>
-    
+
       <div class="players">
         <h4 class="name">Lebron James</h4>
         <p class="team">Los Angeles Lakers</p>
       </div>
-    
+
       <div class="players">
         <h4 class="name">Stephen Curry</h4>
         <p class="team">Golden States Warriors</p>
       </div>
     </div>
+
+    <script src="script.js"></script>
+  </body>
 
 </html>
