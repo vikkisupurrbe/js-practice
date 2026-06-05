@@ -5,8 +5,6 @@
 body {
   background-color: rgb(0, 0, 0);
   min-width: 300px;
-  display: flex;
-  flex-direction: column;
   padding: 96px 96px 96px 96px;
 }
 
@@ -15,10 +13,10 @@ body {
   flex-direction: column;
   gap: 40px;
   color: rgb(255, 255, 255);
-
 }
 
 .plan-card {
+  flex: 1;
   padding-top: 16px;
   background-color: rgb(36, 36, 36);
   padding-left: 16px;
