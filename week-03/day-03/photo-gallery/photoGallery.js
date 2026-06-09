@@ -19,6 +19,7 @@ async function renderPhotos() {
   container.innerHTML = "";
   photos.forEach(({download_url}) => {
     const photo = document.createElement("div");
+    photo.className="photo";
     photo.innerHTML = `<img src="${download_url}">`;
     container.appendChild(photo);
   });
