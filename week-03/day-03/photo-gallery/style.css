@@ -23,7 +23,7 @@ body {
   grid-template-columns: 25% 1fr;
   grid-template-rows: 120px 4fr 120px;
   gap: 1em;
-  grid-template-areas: 
+  grid-template-areas:
     "box-2 box-1 box-1"
     "box-2 box-3 box-3"
     "box-4 box-4 box-4";
@@ -50,10 +50,26 @@ body {
   border-radius: 8px;
 }
 
-.photo:nth-child(3n) {
-  grid-row: span 2;
+@media (min-width: 702px) {
+  .photo:nth-child(3n) {
+      grid-row: span 2;
+    }
+  
+  .photo:nth-child(5n) {
+    grid-column: span 1;
+  }
 }
 
-.photo:nth-child(5n) {
-  grid-column: span 1;
+@media (max-width: 954px) {
+  .grid-container {
+    height: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: 120px 60px 1fr 120px;
+    gap: 1em;
+    grid-template-areas:
+      "box-1"
+      "box-2"
+      "box-3"
+      "box-4";
+  }
 }
