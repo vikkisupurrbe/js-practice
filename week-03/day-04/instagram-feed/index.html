@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Feed</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <div class="grid-container">
+    <div id="header" style="grid-area: header">
+      <p>New post</p>
+      <p>Instagram</p>
+      <p>Notifications</p>
+    </div>
+
+    <div class="box" style="grid-area: content">
+      <!-- Stories -->
+      <div id="follow-stories">
+        <div class="story">
+          <img class="avatar-icons" src="avatar-default.svg" alt="avatar-icon">
+          <span class="user-name">username</span>
+        </div>
+        <div class="story">
+          <img class="avatar-icons" src="avatar-default.svg" alt="avatar-icon">
+          <span class="user-name">username</span>
+        </div>
+        <div class="story">
+          <img class="avatar-icons" src="avatar-default.svg" alt="avatar-icon">
+          <span class="user-name">username</span>
+        </div>
+        <div class="story">
+          <img class="avatar-icons" src="avatar-default.svg" alt="avatar-icon">
+          <span class="user-name">username</span>
+        </div>
+        <div class="story">
+          <img class="avatar-icons" src="avatar-default.svg" alt="avatar-icon">
+          <span class="user-name">username</span>
+        </div>
+      </div>
+
+      <!-- Feeds -->
+      <div id="feed-container">
+        <div class="feed-author">
+          <img class="feed-author-icons" src="avatar-default.svg" alt="feed-author-icon" style="grid-area: author-icon">
+          <span class="feed-author-username" style="grid-area: author-username">username</span>
+          <p class="more" style="grid-area: more">...</p>
+        </div>
+
+        <div class="feed-img-container">
+          <img class="feed-img" src="" alt="feed-photo">
+        </div>
+
+        <div class="feed-actions-container">
+          <div class="feed-actions">
+            <p>Likes</p>
+            <p>Comments</p>
+            <p>Tags</p>
+            <p>Reposts</p>
+            <p class="feed-bookmark">Bookmark</p>
+          </div>
+          <p class="feed-friend-reactions">Liked by John Doe and others</p>
+        </div>
+
+        <div class="feed-text">
+          <section>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium turpis a malesuada porta. Praesent eu
+            malesuada nisi, non venenatis diam.
+          </section>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- Footer -->
+  <div id="footer" style="grid-area: footer">
+    <p>Home</p>
+    <p>Reels</p>
+    <p>Message</p>
+    <p>Discover</p>
+    <p>Account</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
