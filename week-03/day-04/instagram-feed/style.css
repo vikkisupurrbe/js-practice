@@ -25,6 +25,14 @@
   flex-direction: row;
   gap: 2em;
   margin-bottom: 2em;
+  /* horizontal scroll when content overflows */
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+}
+
+#follow-stories::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
 
 .story {
@@ -53,6 +61,7 @@
   grid-template-areas: "author-icon author-username more";
   align-items: center;
   justify-items: center;
+  margin-bottom: 1em;
 }
 
 .feed-author-icons {
