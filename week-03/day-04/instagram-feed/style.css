@@ -44,7 +44,7 @@
 .feed-author {
   display: grid;
   grid-template-columns: 10% 1fr 10%;
-  grid-template-areas: "author-icon" "author username" "more";
+  grid-template-areas: "author-icon author-username more";
   align-items: center;
   justify-items: center;
 }
@@ -58,7 +58,7 @@
 
 .feed-author-username {
   display: flex;
-  justify-self: left;
+  justify-self: start;
 }
 
 .feed-actions {
