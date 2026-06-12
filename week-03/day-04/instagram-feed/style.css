@@ -42,8 +42,9 @@
 }
 
 #feed-container {
-  display: grid;
   width: 468px;
+  margin: 0 auto;
+  margin-bottom: 3em;
 }
 
 .feed-author {
@@ -69,6 +70,7 @@
 .feed-img {
   width: 468px;
   height: auto;
+  border-radius: 6px;
 }
 
 .feed-actions {
