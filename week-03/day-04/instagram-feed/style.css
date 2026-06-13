@@ -1,6 +1,6 @@
 * {
   font-family: sans-serif;
-  font-size: 12px;
+  font-size: clamp(10px, 2vw, 14px);
 }
 
 .grid-container {
@@ -14,10 +14,25 @@
 }
 
 #header {
+  background-color: white;
+  position: sticky;
+  top: 0;
   padding: 0px 16px 0px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 0.5em;
+  overflow: hidden;
+}
+
+#header p {
+  white-space: nowrap; /* prevents individual items from wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis; /* shows "..." if text is too long */
+}
+
+#content {
+  min-width: 0;
 }
 
 #follow-stories {
@@ -45,12 +60,14 @@
 .avatar-icons {
   background-color: lightgray;
   border-radius: 45px;
-  width: 90px;
-  height: 90px;
+  width: min(90px, 15vw);
+  height: min(90px, 15vw);
 }
 
 #feed-container {
-  width: 468px;
+  width: 100%;
+  min-width: 0;
+  max-width: 468px;
   margin: 0 auto;
   margin-bottom: 3em;
 }
@@ -74,12 +91,12 @@
 .feed-author-username {
   display: flex;
   justify-self: start;
+  margin-left: 0.5em;
 }
 
 .feed-img {
-  width: 468px;
+  width: 100%;
   height: auto;
-  border-radius: 6px;
 }
 
 .feed-actions {
@@ -88,7 +105,15 @@
   gap: 1em;
 }
 
+.feed-bookmark {
+  display: flex;
+  margin-left: auto;
+}
+
 #footer {
+  background-color: white;
+  position: sticky;
+  bottom: 0;
   padding: 0px 16px 0px 16px;
   display: flex;
   justify-content: space-between;
