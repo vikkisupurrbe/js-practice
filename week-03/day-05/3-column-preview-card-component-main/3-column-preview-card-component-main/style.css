@@ -9,19 +9,18 @@ body {
 .cards-container {
   width: 90%;
   display: grid;
-  grid-auto-flow: column;
-  grid-template-areas: "sedan-card suv-card luxury-card";
+  grid-auto-flow: column; /* grid-auto-flow: column automatically places items in columns */
+  grid-auto-columns: 1fr;
   border-radius: 8px;
   overflow: hidden;
 }
 
 .car-card {
-  height: 400px;
+  min-height: 400px;
   padding: 2em;
   align-content: center;
   display: grid;
-  grid-template-rows: 1fr 1fr 4fr 1fr;
-  gap: 1em;
+  grid-template-rows: 1fr 1fr 2fr 1fr;
 }
 
 .car-card:nth-child(1) {
@@ -61,6 +60,12 @@ body {
   background-color: hsl(0, 0%, 95%);
   border-radius: 100px;
   cursor: pointer;
+}
+
+.learn-more:hover {
+  background-color: transparent;
+  border: 2px solid hsl(0, 0%, 95%);
+  color: hsl(0, 0%, 95%);
 }
 
 .btn-sedan {
