@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 :root {
   background-color: rebeccapurple;
 }
@@ -12,7 +16,7 @@ body {
 
 .container {
   width: 100%;
-  margin: 3.125rem ayto 0 auto;
+  margin: 3.125rem auto 0 auto;
 }
 
 header {
@@ -43,12 +47,6 @@ label {
   align-items: center;
   font-size: 1.125rem;
   margin-bottom: 0.5rem;
-}
-
-form {
-  background: var(--color-darkblue-alpha);
-  padding: 2.5rem 0.625rem;
-  border-radius: 0.25rem;
 }
 
 #survey-form {
