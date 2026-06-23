@@ -43,9 +43,15 @@ document.getElementById("submit-btn").addEventListener("click", (e) => {
     showError("email", "email-group", "Looks like this is not an email");
   }
   if (!password) showError("password", "password-group", "Password cannot be empty");
-})
+}); // this semicolon is a must
 
-console.log(document.getElementById("password")); // should log the input element, not null
+/*
+
+Without the semicolon, JavaScript may try to continue the previous expression onto the next line.
+
+Normally ASI should insert a semicolon here, but there are situations where line breaks create weird parsing behavior.
+
+*/
 
 // On input, clear error as user types
 ["first-name", "last-name", "email", "password"].forEach(id => {
