@@ -3,12 +3,15 @@ body {
   height: 100dvh;
   display: flex;
   align-items: center;
-  padding: 2em 4em 2em 4em;
+  justify-content: center;
+  padding: 5% 10% 5% 10%;
 }
 
 .sign-up-page {
+  min-width: 300px;
   display: grid;
-  grid-auto-flow: column;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2em;
 }
 
 .title-container {
@@ -23,12 +26,20 @@ body {
   padding: 20px;
 }
 
+#try-banner {
+  text-align: center;
+}
+
 #sign-up-form {
   display: grid;
   gap: 1em;
   margin-bottom: 1em;
 }
 
-#submit-btn {
-  margin-bottom: 1em;
+.form-control {
+  min-height: 3em;
+}
+
+.disclaimer {
+  text-align: center;
 }
