@@ -1,0 +1,34 @@
+body {
+  width: auto;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  padding: 2em 4em 2em 4em;
+}
+
+.sign-up-page {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.form-container {
+  display: grid;
+  padding: 20px;
+}
+
+#sign-up-form {
+  display: grid;
+  gap: 1em;
+  margin-bottom: 1em;
+}
+
+#submit-btn {
+  margin-bottom: 1em;
+}
