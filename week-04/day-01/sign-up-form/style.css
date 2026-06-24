@@ -1,4 +1,11 @@
+* {
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
+
 body {
+  background-color: hsl(0, 100%, 74%);
+  background-image: url("./images/bg-intro-desktop.png");
   width: auto;
   height: 100dvh;
   display: flex;
@@ -11,10 +18,11 @@ body {
   min-width: 300px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2em;
+  gap: 1em;
 }
 
 .title-container {
+  color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,20 +35,68 @@ body {
 }
 
 #try-banner {
+  background-color: hsl(248, 32%, 49%);
+  color: white;
   text-align: center;
+  padding: 1em;
+  border-radius: 6px;
+  box-shadow: 0px 4px hsla(249, 10%, 26%, 0.30);
 }
 
 #sign-up-form {
+  background-color: white;
+  width: 100%;
   display: grid;
   gap: 1em;
   margin-bottom: 1em;
+  padding: 2em;
+  border-radius: 6px;
+  box-shadow: 0px 4px hsla(249, 10%, 26%, 0.30);
+}
+
+input {
+  padding-left: 10px;
+  border-width: 1px;
 }
 
 .form-control {
   width: 100%;
+  border: 1px solid hsla(249, 10%, 26%, 0.30);;
   min-height: 3em;
+  border-radius: 6px;
+}
+
+.form-group.error .form-control {
+  border: 2px solid hsl(0, 100%, 74%);
+  color: hsl(0, 100%, 74%);
+}
+
+.warning {
+  color: hsl(0, 100%, 74%); /* red from the design */
+  font-size: 0.75rem;
+  font-style: italic;
+  text-align: right;
+  display: block;
+  margin-top: 0.25rem;
+}
+
+#submit-btn {
+  background-color: hsl(154, 59%, 51%); 
+  color: white;
+  font-weight: 500;
+  min-height: 3em;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0px 4px hsla(249, 10%, 26%, 0.30);
+  cursor: pointer;
+}
+
+#submit-btn:hover {
+  background-color: hsl(154, 59%, 80%); 
 }
 
 .disclaimer {
   text-align: center;
+  color: hsla(249, 10%, 26%, 0.70);
+  font-size: 10px;
 }
