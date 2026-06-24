@@ -1,17 +1,23 @@
 * {
   box-sizing: border-box;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
 }
 
 body {
   background-color: hsl(0, 100%, 74%);
   background-image: url("./images/bg-intro-desktop.png");
   width: auto;
-  height: 100dvh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5% 10% 5% 10%;
+  padding: 5% 5%;
+}
+
+@media (min-width: 768px) {
+  body {
+    padding: 5% 10%;
+  }
 }
 
 .sign-up-page {
@@ -61,7 +67,7 @@ input {
 
 .form-control {
   width: 100%;
-  border: 1px solid hsla(249, 10%, 26%, 0.30);;
+  border: 1px solid hsla(249, 10%, 26%, 0.30);
   min-height: 3em;
   border-radius: 6px;
 }
@@ -69,6 +75,11 @@ input {
 .form-group.error .form-control {
   border: 2px solid hsl(0, 100%, 74%);
   color: hsl(0, 100%, 74%);
+  /* error icon */
+  background-image: url('./images/icon-error.svg');
+  background-repeat: no-repeat;
+  background-position: right 1em center;
+  padding-right: 3em; /* prevent text overlapping icon */
 }
 
 .warning {
