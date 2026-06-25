@@ -95,7 +95,8 @@ nav a:hover {
 
 .dropdown-menu {
   position: absolute;
-  width: inherit;
+  min-width: 150px;
+  width: max-content;
   display: flex;
   flex-direction: column;
   left: 0;
@@ -104,6 +105,10 @@ nav a:hover {
   padding: var(--space-sm);
   border-radius: 0.375rem;
   box-shadow: var(--shadow-sm);
+}
+
+.dropdown li{
+  width: 100%;
 }
 
 .dropdown-toggle {
@@ -116,3 +121,17 @@ nav a:hover {
   height: inherit;
 }
 
+.dropdown-toggle:hover {
+  color: var(--color-accent-hover);
+  cursor: pointer;
+}
+
+.theme-toggle {
+  background-color: var(--color-surface);
+  margin-right: 30px;
+  border-radius: 0.375em;
+  border-width: 1px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
