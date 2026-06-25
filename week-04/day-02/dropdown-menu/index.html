@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Switcher</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="#" class="nav-logo">MySite</a>
+
+    <ul class="nav-links">
+      <li><a href="#" class="nav-link">Home</a></li>
+      <li><a href="#" class="nav-link">About</a></li>
+
+      <!-- Dropdown -->
+      <li class="dropdown">
+        <button class="dropdown-toggle nav-link">
+          Projects <span class="dropdown-arrow">▾</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="#" class="dropdown-item">Web Apps</a></li>
+          <li><a href="#" class="dropdown-item">Mobile</a></li>
+          <li><a href="#" class="dropdown-item">Open Source</a></li>
+        </ul>
+      </li>
+
+      <li><a href="#" class="nav-link">Contact</a></li>
+    </ul>
+
+    <!-- Theme toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+      🌙
+    </button>
+  </nav>
+
+  <!-- Main content -->
+  <main class="container">
+    <section class="hero">
+      <h1>Build something great.</h1>
+      <p class="text-muted">
+        A minimal layout to practice CSS variables, theme switching, transitions, and animated dropdowns.
+      </p>
+      <div class="button-group">
+        <button class="btn btn-primary">Get Started</button>
+        <button class="btn btn-secondary">Learn More</button>
+      </div>
+    </section>
+
+    <!-- Cards -->
+    <section class="cards-grid">
+      <div class="card">
+        <h3>Card One</h3>
+        <p class="text-muted">Hover over me to see the transition effect.</p>
+        <a href="#" class="card-link">Read more...</a>
+      </div>
+      <div class="card">
+        <h3>Card Two</h3>
+        <p class="text-muted">Each card lifts on hover using transform and shadow.</p>
+        <a href="#" class="card-link">Read more...</a>
+      </div>
+      <div class="card">
+        <h3>Card Three</h3>
+        <p class="text-muted">All transitions use the same duration for consistency.</p>
+        <a href="#" class="card-link">Read more...</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
