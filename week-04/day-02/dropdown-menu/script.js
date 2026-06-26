@@ -16,3 +16,14 @@ document.addEventListener("click", e => {
     dropdown.classList.remove("active");
   })
 })
+
+/* Theme toggle */
+const themeToggle = document.getElementById("theme-toggle");
+
+themeToggle.addEventListener("click", () => {
+  const html = document.documentElement;
+  const isDark = html.dataset.theme === "dark";
+
+  html.dataset.theme = isDark ? "light" : "dark";
+  themeToggle.textContent = isDark ? "🌙" : "☀️";
+})
