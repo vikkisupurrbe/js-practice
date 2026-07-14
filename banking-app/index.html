@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Bank | Staff Portal</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <div class="brand">
+    <div class="shield">RBC</div>
+    <span class="brand-name">Royal Bank <small>Staff Portal</small></span>
+  </div>
+  <div class="topbar-right">
+    <span class="lock">&#128274;</span>
+    <span class="agent-name" id="agentName">Y.Liu &middot; Agent #268432580</span>
+    <button class="btn-signout">Sign Out</button>
+    <span class="topbar-date" id="topbarDate"></span>
+  </div>
+</header>
+
+<!-- ============ MAIN NAV ============ -->
+<nav class="mainnav">
+  <button class="mainnav-tab active" data-tab="dashboard">Dashboard</button>
+  <button class="mainnav-tab" data-tab="crm">Customer Management</button>
+  <button class="mainnav-tab" data-tab="ledger">Transaction Ledger</button>
+  <button class="mainnav-tab" data-tab="chat">Client Chat</button>
+</nav>
+
+<!-- ============ SUB NAV ============ -->
+<div class="subnav" id="subnav">
+  <span class="subnav-item current" id="subnavLabel">Dashboard Overview</span>
+</div>
+
+<!-- ============ BODY LAYOUT ============ -->
+<div class="body-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="side-block-title">Staff Tools</div>
+    <ul class="side-list">
+      <li class="side-parent open" data-goto="dashboard">Dashboard
+        <ul>
+          <li class="active-link" data-goto="dashboard">Overview &amp; Alerts</li>
+        </ul>
+      </li>
+      <li class="side-parent open" data-goto="crm">Customer Management
+        <ul>
+          <li data-goto="crm">Search Client Profile</li>
+          <li data-goto="crm">KYC &amp; Account Status</li>
+          <li data-goto="crm">Linked Products</li>
+        </ul>
+      </li>
+      <li class="side-parent open" data-goto="ledger">Transaction Ledger
+        <ul>
+          <li data-goto="ledger">Search All Transactions</li>
+          <li data-goto="ledger">Reverse / Trace Payment</li>
+        </ul>
+      </li>
+      <li class="side-parent open" data-goto="chat">Client Chat
+        <ul>
+          <li data-goto="chat">Active Conversations</li>
+        </ul>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- ===================== DASHBOARD ===================== -->
+    <section id="tab-dashboard" class="tab-panel active">
+      <h1>Branch &amp; Systems Dashboard</h1>
+      <p class="page-sub">Live snapshot as of <span id="dashDate"></span></p>
+
+      <div class="stat-grid" id="statGrid"></div>
+
+      <div class="two-col">
+        <div class="panel">
+          <h2 class="panel-title">Fraud &amp; Risk Alerts</h2>
+          <table class="data-table" id="fraudTable">
+            <thead><tr><th>Flagged</th><th>Client</th><th>Card Number</th><th>Reason</th><th>Amount</th><th></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="panel">
+          <h2 class="panel-title">Pending Approvals</h2>
+          <table class="data-table" id="approvalTable">
+            <thead><tr><th>Type</th><th>Client</th><th>Details</th><th>Requested</th><th></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CRM ===================== -->
+    <section id="tab-crm" class="tab-panel">
+      <h1>Customer Management</h1>
+      <p class="page-sub">Search a client profile using their 16-digit client card number.</p>
+
+      <div class="search-bar">
+        <input type="text" id="cardSearchInput" placeholder="e.g. 4519 0112 3456 7890" maxlength="19">
+        <button id="cardSearchBtn" class="btn-primary">Search Client</button>
+        <span class="search-hint">Try: 4519 0112 3456 7890</span>
+      </div>
+      <div id="crmError" class="error-msg" style="display:none;"></div>
+
+      <div id="clientProfile" class="client-profile" style="display:none;"></div>
+    </section>
+
+    <!-- ===================== LEDGER ===================== -->
+    <section id="tab-ledger" class="tab-panel">
+      <h1>Transaction Ledger</h1>
+      <p class="page-sub">Bank-wide searchable log of debits, credits and pending settlements.</p>
+
+      <div class="search-bar">
+        <input type="text" id="ledgerSearchInput" placeholder="Search by client name, card number, merchant, or type...">
+        <button id="ledgerSearchBtn" class="btn-primary">Search</button>
+        <button id="ledgerResetBtn" class="btn-secondary">Reset</button>
+      </div>
+
+      <table class="data-table full" id="ledgerTable">
+        <thead>
+          <tr>
+            <th>Date</th><th>Client</th><th>Account</th><th>Type</th><th>Merchant</th>
+            <th>Amount</th><th>Balance</th><th>Status</th><th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p class="table-note" id="ledgerCount"></p>
+    </section>
+
+    <!-- ===================== CHAT ===================== -->
+    <section id="tab-chat" class="tab-panel">
+      <h1>Client Chat</h1>
+      <p class="page-sub">Respond to client inquiries and resolve issues directly from their conversation.</p>
+
+      <div class="chat-layout">
+        <div class="chat-threads" id="chatThreads"></div>
+        <div class="chat-window" id="chatWindow">
+          <div class="chat-empty">Select a conversation to begin.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="#">Legal</a> | <a href="#">Security</a> | <a href="#">Accessibility</a> | <a href="#">Contact Us</a>
+  </div>
+  <div class="footer-search">
+    <input type="text" placeholder="Search internal knowledge base">
+    <button>Search</button>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
