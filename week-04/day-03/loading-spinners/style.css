@@ -30,8 +30,7 @@ section {
   width: 24px;
   height: 24px;
   background-color: black;
-  animation: rotate 1s ease-in forwards infinite;
-  transition: 1s ease-in-out;
+  animation: rotate 1.5s linear infinite;
 }
 
 @keyframes rotate {
