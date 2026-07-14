@@ -24,6 +24,7 @@ h3 {
   margin-top: 0;
 }
 
+/* Rotate spinner */
 .spinner-arm {
   width: 72px;
   height: 72px;
@@ -42,4 +43,34 @@ h3 {
 @keyframes rotate {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg);}
+}
+
+/* Pulse spinner */
+.spinner-container {
+  width: fit-content;
+  height: 72px;
+  margin: 1em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.pulse-spinner {
+  width: 24px;
+  height: 24px;
+  background-color: black;
+  border-radius: 50%;
+  animation: pulse 2s linear infinite;
+}
+
+@keyframes pulse {
+  25%,
+  75% {
+    scale: 60%;
+    opacity: 60%;
+  }
+  50% {
+    scale: 100%;
+    opacity: 100%;
+  }
 }
