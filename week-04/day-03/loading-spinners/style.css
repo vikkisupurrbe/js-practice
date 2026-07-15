@@ -4,6 +4,7 @@
 
 body {
   width: 60vw;
+  padding: 1em;
   margin: 0 auto;
 }
 
@@ -129,22 +130,20 @@ h3 {
 .skeleton-content {
   display: flex;
   gap: 1em;
-  background: linear-gradient(
-    90deg,
-    #eceff1 25%,
-    #f5f7f8 37%,
-    #eceff1 63%
-  );
-  background-size: 400% 100%;
-  animation: shimmer 1.4s ease infinite;
 }
 
 .picture-placeholder {
   width: 24px;
   height: 24px;
   margin-bottom: 1em;
-  background-color: black;
-  opacity: 0.3;
+  background: linear-gradient(
+    90deg,
+    #d1d5db 25%,
+    #e5e7eb 37%,
+    #d1d5db 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 2s ease infinite;
   border-radius: 50%;
 }
 
@@ -152,8 +151,14 @@ h3 {
   width: 240px;
   height: 24px;
   margin-bottom: 1em;
-  background-color: black;
-  opacity: 0.3;
+  background: linear-gradient(
+    90deg,
+    #d1d5db 25%,
+    #e5e7eb 37%,
+    #d1d5db 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 2s ease infinite;
   border-radius: 8px;
 }
 
@@ -162,6 +167,6 @@ h3 {
     background-position: 100% 0;
   }
   100% {
-    background-position: 0% 0;
+    background-position: -100% 0;
   }
 }
