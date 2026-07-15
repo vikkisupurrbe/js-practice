@@ -107,8 +107,9 @@ h3 {
 .dots-screen {
   width: 0;
   overflow: hidden;
-  white-space: nowrap;
-  animation: dots 1.5s steps(3, end) infinite;
+  display: flex; /* Forces dots onto a single row */
+  gap: 0.5em;
+  animation: dots 1.2s steps(3, start) infinite;
 }
 
 .dots-spinner {
@@ -116,9 +117,10 @@ h3 {
   height: 24px;
   background-color: black;
   border-radius: 50%;
+  flex-shrink: 0; /* Prevents the dots from squishing */
 }
 
 @keyframes dots {
   0%   { width: 0; }
-  100% { width: 72px; }
+  100% { width: 88px; }
 }
