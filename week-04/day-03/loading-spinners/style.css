@@ -93,8 +93,12 @@ h3 {
 .bounce-spinner:nth-child(3) { animation-delay: -0.4s; }
 
 @keyframes bounce {
+  0%, 100% {
+    transform: translateY();
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
   50% {
-    transform: translateY(100%);
-    transition: 0.3s cubic-bezier(0.3, 0.8, 0.3, 2.3);
+    transform: translateY(-32px);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
