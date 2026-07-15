@@ -102,3 +102,23 @@ h3 {
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
+
+/* Dots spinner */
+.dots-screen {
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: dots 1.5s steps(3, end) infinite;
+}
+
+.dots-spinner {
+  width: 24px;
+  height: 24px;
+  background-color: black;
+  border-radius: 50%;
+}
+
+@keyframes dots {
+  0%   { width: 0; }
+  100% { width: 72px; }
+}
