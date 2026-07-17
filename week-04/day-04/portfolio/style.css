@@ -1,0 +1,467 @@
+/* ==========================================================================
+   PORTFOLIO DESIGN SYSTEM
+   Vibe: modern · business · calm
+   Type: Plus Jakarta Sans (headings/UI) x Lora (body/reading)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. Fonts
+   Prefer a <link> in <head> for performance; @import kept as a fallback.
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   1. LIGHT THEME (default)
+   -------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+
+  /* ---- Font families ---- */
+  --ff-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --ff-body: 'Lora', Georgia, serif;
+
+  /* ---- Font weights ---- */
+  --fw-reg: 400;
+  --fw-med: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+
+  /* ---- Color: base palette (raw) ----
+     Named so the "why" is legible at a glance. Only referenced by the
+     semantic tokens below — components should never use these directly. */
+  --raw-ink-900: #16202A;
+  --raw-ink-700: #1E2A32;
+  --raw-slate-600: #55636C;
+  --raw-slate-400: #8A96A0;
+  --raw-mist-200: #DDD7CC;
+  --raw-mist-100: #EFEBE3;
+  --raw-paper-50: #F7F5F1;
+  --raw-white: #FFFFFF;
+  --raw-harbor-700: #24384373;
+  --raw-harbor-600: #2F4C5A;
+  --raw-harbor-500: #3E6577;
+  --raw-brass-600: #A9762F;
+  --raw-brass-500: #C08F42;
+  --raw-sage-600: #3F7D53;
+  --raw-clay-600: #B5502E;
+
+  /* ---- Color: semantic tokens (what components actually use) ---- */
+  --color-bg: var(--raw-paper-50);            /* page background            */
+  --color-surface: var(--raw-white);          /* cards, nav, footer         */
+  --color-surface-alt: var(--raw-mist-100);   /* alternating sections       */
+  --color-border: var(--raw-mist-200);        /* hairlines, dividers        */
+
+  --color-text: var(--raw-ink-700);           /* body copy                  */
+  --color-text-secondary: var(--raw-slate-600); /* captions, meta          */
+  --color-text-on-primary: var(--raw-white);  /* text on filled buttons     */
+  --color-text-muted: var(--raw-slate-400);
+
+  --color-primary: var(--raw-harbor-600);     /* brand / CTAs / links       */
+  --color-primary-hover: #243A45;
+  --color-primary-soft: #E7EDEF;              /* tinted bg for badges, tags */
+
+  --color-accent: var(--raw-brass-600);       /* sparing highlight only     */
+  --color-accent-soft: #F5EADA;
+
+  --color-success: var(--raw-sage-600);
+  --color-error: var(--raw-clay-600);
+
+  --color-focus-ring: var(--raw-harbor-500);
+
+  /* ---- Shadows: soft, low-elevation, calm (never harsh) ---- */
+  --shadow-sm: 0 1px 2px rgba(22, 32, 42, 0.06);
+  --shadow-md: 0 6px 20px rgba(22, 32, 42, 0.08);
+  --shadow-lg: 0 16px 40px rgba(22, 32, 42, 0.10);
+
+  /* ---- Typography scale (fluid, mobile-first) ---- */
+  --fs-h1: clamp(2.25rem, 1.6rem + 3vw, 3.5rem);   /* 36–56px */
+  --fs-h2: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem); /* 28–40px */
+  --fs-h3: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem); /* 22–28px */
+  --fs-h4: 1.25rem;    /* 20px */
+  --fs-h5: 1.0625rem;  /* 17px */
+  --fs-body-lg: 1.125rem; /* 18px — Lora reads best a touch larger */
+  --fs-body: 1rem;        /* 16px */
+  --fs-small: 0.875rem;   /* 14px */
+  --fs-caption: 0.75rem;  /* 12px */
+
+  --lh-heading: 1.2;
+  --lh-body: 1.7;    /* generous leading — Lora needs room to breathe */
+  --lh-tight: 1.3;
+
+  --ls-heading: -0.01em;
+  --ls-eyebrow: 0.08em; /* small caps / labels tracked wider */
+
+  /* ---- Spacing scale (4px base) ---- */
+  --space-1: 0.25rem;  /* 4px  */
+  --space-2: 0.5rem;   /* 8px  */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-12: 3rem;    /* 48px */
+  --space-16: 4rem;    /* 64px */
+  --space-24: 6rem;    /* 96px */
+  --space-32: 8rem;    /* 128px */
+
+  /* ---- Radius ---- */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 0.15s;
+  --dur-base: 0.3s;
+
+  /* ---- Grid / layout ---- */
+  --container-max: 1320px;
+  --container-pad: clamp(1.25rem, 4vw, 3rem);
+  --grid-columns: 12;
+  --grid-gap: clamp(1rem, 2vw, 2rem);
+
+  /* ---- Breakpoints (reference only — use in media queries directly) ----
+     mobile:  0–599px
+     tablet:  600–1023px
+     desktop: 1024–1439px
+     wide:    1440px+           */
+}
+
+/* --------------------------------------------------------------------------
+   2. DARK THEME
+   Toggle via [data-theme="dark"] on <html>, or let it follow system
+   preference automatically (see media query at the bottom of this section).
+   -------------------------------------------------------------------------- */
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --raw-ink-900: #ECEAE2;
+  --raw-paper-50: #14191C;      /* page bg — soft charcoal-navy, not #000 */
+  --raw-white: #1B2226;         /* "surface" white becomes elevated panel */
+  --raw-mist-100: #202830;
+  --raw-mist-200: #2E373C;
+  --raw-slate-600: #A8AFB3;
+  --raw-slate-400: #75808A;
+  --raw-harbor-600: #7FA8B8;    /* brightened for AA contrast on dark bg */
+  --raw-harbor-500: #98BAC7;
+  --raw-brass-600: #D3A96A;
+  --raw-sage-600: #7FB78F;
+  --raw-clay-600: #E08A63;
+
+  --color-bg: var(--raw-paper-50);
+  --color-surface: var(--raw-white);
+  --color-surface-alt: var(--raw-mist-100);
+  --color-border: var(--raw-mist-200);
+
+  --color-text: #EDEAE2;
+  --color-text-secondary: var(--raw-slate-600);
+  --color-text-on-primary: #0F1417;
+  --color-text-muted: var(--raw-slate-400);
+
+  --color-primary: var(--raw-harbor-600);
+  --color-primary-hover: var(--raw-harbor-500);
+  --color-primary-soft: #223038;
+
+  --color-accent: var(--raw-brass-600);
+  --color-accent-soft: #2E2717;
+
+  --color-success: var(--raw-sage-600);
+  --color-error: var(--raw-clay-600);
+
+  --color-focus-ring: var(--raw-harbor-500);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.40);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* Respect system preference automatically when no explicit choice is set */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. BASE / RESET
+   -------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--ff-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: var(--fw-reg);
+  transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+ul, li, button {
+  margin: 0;
+  padding: 0;
+}
+
+/* Visible, calm focus state everywhere — never remove without replacing */
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. TYPOGRAPHY
+   Headings: Plus Jakarta Sans, business/UI voice — confident, tight leading.
+   Body: Lora, reading voice — warm, generous leading for long-form text.
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5 {
+  font-family: var(--ff-heading);
+  color: var(--color-text);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  margin: 0;
+}
+
+h1 { font-size: var(--fs-h1); font-weight: var(--fw-extrabold); }
+h2 { font-size: var(--fs-h2); font-weight: var(--fw-bold); }
+h3 { font-size: var(--fs-h3); font-weight: var(--fw-semibold); }
+h4 { font-size: var(--fs-h4); font-weight: var(--fw-semibold); }
+h5 { font-size: var(--fs-h5); font-weight: var(--fw-med); }
+
+p {
+  font-family: var(--ff-body);
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-body);
+  color: var(--color-text);
+  margin: 0;
+}
+
+p.lede {
+  font-size: var(--fs-h5);
+  color: var(--color-text-secondary);
+}
+
+small, .caption {
+  font-family: var(--ff-heading); /* UI-adjacent text stays sans */
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  letter-spacing: 0.01em;
+}
+
+.eyebrow {
+  font-family: var(--ff-heading);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+strong { font-weight: var(--fw-bold); }
+
+/* --------------------------------------------------------------------------
+   5. GRID SYSTEM
+   12-column, fluid gutters, centered container. Mobile-first: full-width
+   stack under 600px, columns activate from tablet up.
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--grid-gap);
+}
+
+/* Column spans — mobile default: every column takes full width */
+[class^='col-'] { grid-column: span var(--grid-columns); }
+
+@media (min-width: 600px) {
+  .col-sm-1  { grid-column: span 1; }
+  .col-sm-2  { grid-column: span 2; }
+  .col-sm-3  { grid-column: span 3; }
+  .col-sm-4  { grid-column: span 4; }
+  .col-sm-6  { grid-column: span 6; }
+  .col-sm-12 { grid-column: span 12; }
+}
+
+@media (min-width: 1024px) {
+  .col-md-1  { grid-column: span 1; }
+  .col-md-2  { grid-column: span 2; }
+  .col-md-3  { grid-column: span 3; }
+  .col-md-4  { grid-column: span 4; }
+  .col-md-5  { grid-column: span 5; }
+  .col-md-6  { grid-column: span 6; }
+  .col-md-7  { grid-column: span 7; }
+  .col-md-8  { grid-column: span 8; }
+  .col-md-9  { grid-column: span 9; }
+  .col-md-12 { grid-column: span 12; }
+}
+
+/* Flexible row utility for non-grid layouts (navbars, footers) */
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+/* --------------------------------------------------------------------------
+   6. COMPONENT TOKENS — worked examples
+   Rebuilt from the original site's structure (navbar, work-card, footer,
+   before-after-button) to prove the tokens above in real components.
+   -------------------------------------------------------------------------- */
+
+/* Navbar — was fixed-height Ubuntu/Orienta on a teal accent; now calm and
+   sans-serif throughout, sitting on the surface color with a hairline. */
+.navbar {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+.navbar .container {
+  height: 88px;
+}
+.navbar-logo-link {
+  font-family: var(--ff-heading);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+}
+.navbar-link {
+  font-family: var(--ff-heading);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-med);
+  color: var(--color-text-secondary);
+}
+.navbar-link:hover,
+.navbar-link.is-active {
+  color: var(--color-primary);
+}
+
+/* Work card — was a fixed 456px teal/cream block with a hover-invert; now a
+   quiet elevated card using shadow instead of a jarring color flip. */
+.work-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+}
+.work-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.card-tag {
+  font-family: var(--ff-heading);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+.card-title {
+  font-family: var(--ff-heading);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  margin-top: var(--space-3);
+}
+.card-description {
+  font-family: var(--ff-body);
+  font-size: var(--fs-body);
+  color: var(--color-text-secondary);
+  line-height: var(--lh-body);
+  margin-top: var(--space-4);
+}
+
+/* Buttons — was a 78px-tall pill in a single orange accent; now a
+   restrained primary/secondary pair using the harbor color, accent reserved
+   for the rare highlight only. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--ff-heading);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  border-radius: var(--radius-pill);
+  padding: var(--space-3) var(--space-6);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.button-primary {
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+}
+.button-primary:hover {
+  background: var(--color-primary-hover);
+}
+.button-secondary {
+  background: transparent;
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+.button-secondary:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* Footer — was a solid teal block; now sits flush with the surface tone,
+   divided by a hairline rather than a hard color change. */
+.footer {
+  background: var(--color-surface-alt);
+  border-top: 1px solid var(--color-border);
+  padding-block: var(--space-16);
+  text-align: center;
+}
+.footer a {
+  color: var(--color-text-secondary);
+}
+.footer a:hover {
+  color: var(--color-primary);
+}
+
+/* Section alternation — replaces relying on one loud accent color for
+   rhythm; sections alternate between bg and surface-alt instead. */
+.section {
+  padding-block: var(--space-24);
+}
+.section-alt {
+  background: var(--color-surface-alt);
+}
