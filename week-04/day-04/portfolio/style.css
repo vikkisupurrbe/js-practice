@@ -204,6 +204,13 @@ body {
   font-weight: var(--fw-reg);
   transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
   -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
 }
 
 img {
@@ -309,7 +316,7 @@ strong { font-weight: var(--fw-bold); }
 }
 
 /* Column spans — mobile default: every column takes full width */
-[class^='col-'] { grid-column: span var(--grid-columns); }
+.grid > :where([class*="col-"]) { grid-column: span var(--grid-columns); }
 
 @media (min-width: 600px) {
   .col-sm-1  { grid-column: span 1; }
