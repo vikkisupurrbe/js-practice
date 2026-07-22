@@ -4,4 +4,5 @@ const links = document.getElementById("navbar-links");
 toggle.addEventListener("click", () => {
   const isOpen = links.classList.toggle("is-open");
   toggle.setAttribute("aria-expanded", isOpen);
+  document.body.classList.toggle("nav-open", isOpen);
 })

@@ -420,7 +420,12 @@ strong { font-weight: var(--fw-bold); }
 
   .navbar-links.is-open {
     display: flex;
+    z-index: 10;
   }
+}
+
+body.nav-open main {
+  pointer-events: none;
 }
 
 /* Work card — was a fixed 456px teal/cream block with a hover-invert; now a
