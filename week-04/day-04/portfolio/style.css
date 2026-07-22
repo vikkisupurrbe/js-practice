@@ -391,6 +391,37 @@ strong { font-weight: var(--fw-bold); }
 .navbar-link.is-active {
   color: var(--color-primary);
 }
+#nav-toggle {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  #nav-toggle {
+    display: inline-flex;
+  }
+
+  .navbar-inner {
+    position: relative;
+  }
+
+  .navbar-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-4);
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-4) var(--container-pad);
+  }
+
+  .navbar-links.is-open {
+    display: flex;
+  }
+}
 
 /* Work card — was a fixed 456px teal/cream block with a hover-invert; now a
    quiet elevated card using shadow instead of a jarring color flip. */
@@ -431,7 +462,7 @@ strong { font-weight: var(--fw-bold); }
 /* Buttons — was a 78px-tall pill in a single orange accent; now a
    restrained primary/secondary pair using the harbor color, accent reserved
    for the rare highlight only. */
-.button {
+ .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -459,6 +490,24 @@ strong { font-weight: var(--fw-bold); }
 }
 .button-secondary:hover {
   border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out) color var(--dur-fast) var(--ease-out);
+}
+.icon-button:hover {
+  background-color: var(--color-surface-alt);
   color: var(--color-primary);
 }
 

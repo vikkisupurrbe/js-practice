@@ -18,13 +18,17 @@
     <div class="container navbar-inner">
       <a href="#" class="navbar-logo-link">Vikki Liu</a>
 
-      <ul class="navbar-links">
+      <button class="icon-button" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navbar-links">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+      </button>
+
+      <ul class="navbar-links" id="navbar-links">
         <li><a href="#" class="navbar-link">About</a></li>
         <li><a href="#" class="navbar-link">Work</a></li>
         <li><a href="#" class="navbar-link">Email</a></li>
   
         <!-- Theme toggle -->
-        <button class="button button-primary">🌙</button>
+        <button class="icon-button" aria-label="Toggle dark mode">🌙</button>
       </ul>
     </div>
    </nav>
@@ -58,5 +62,7 @@
     <a href="#">LinkedIn</a>
     <a href="#">Email</a>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
