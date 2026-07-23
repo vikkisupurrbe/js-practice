@@ -14,6 +14,13 @@
   box-sizing: border-box;
 }
 
+*, *::before, *::after {
+  transition: 
+    background var(--dur-base) var(--ease-out), 
+    color var(--dur-base) var(--ease-out),
+    border var(--dur-base) var(--ease-out)
+}
+
 /* --------------------------------------------------------------------------
    1. LIGHT THEME (default)
    -------------------------------------------------------------------------- */
@@ -202,7 +209,6 @@ body {
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   font-weight: var(--fw-reg);
-  transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
   -webkit-font-smoothing: antialiased;
   display: flex;
   flex-direction: column;
@@ -425,7 +431,10 @@ strong { font-weight: var(--fw-bold); }
     pointer-events: none;
     transition: transform var(--dur-base) var(--ease-out),
                 opacity var(--dur-base) var(--ease-out),
-                visibility 0s linear var(--dur-base);
+                visibility 0s linear var(--dur-base),
+                background var(--dur-base) var(--ease-out),
+                color var(--dur-base) var(--ease-out),
+                border var(--dur-base) var(--ease-out);
   }
 
   .navbar-links.is-open {
@@ -435,7 +444,10 @@ strong { font-weight: var(--fw-bold); }
     pointer-events: auto;
     transition: transform var(--dur-base) var(--ease-out),
                 opacity var(--dur-base) var(--ease-out),
-                visibility 0s linear 0s;
+                visibility 0s linear 0s,
+                background var(--dur-base) var(--ease-out),
+                color var(--dur-base) var(--ease-out),
+                border var(--dur-base) var(--ease-out);
     z-index: 10;
   }
 }
@@ -530,6 +542,9 @@ body.nav-open main {
 .icon-button:hover {
   background-color: var(--color-surface-alt);
   color: var(--color-primary);
+}
+.icon-button svg {
+  fill: var(--color-text);
 }
 
 /* Footer — was a solid teal block; now sits flush with the surface tone,
