@@ -1,6 +1,7 @@
 const toggle = document.getElementById("nav-toggle");
 const links = document.getElementById("navbar-links");
 const navbar = document.querySelector(".navbar");
+const themeToggle =  document.getElementById("theme-toggle");
 
 function openMenu() {
   links.classList.add("is-open");
@@ -28,3 +29,12 @@ document.addEventListener("click", (e) => {
     closeMenu();
   }
 });
+
+/* Theme toggle */
+themeToggle.addEventListener("click", () => {
+  const html = document.documentElement;
+  const isDark = html.dataset.theme === "dark";
+  html.dataset.theme = isDark ? "light" : "dark";
+  themeToggle.textContent = isDark ? "🌙" : "☀️";
+})
+
