@@ -15,6 +15,16 @@ function closeMenu() {
   document.body.classList.remove("nav-open");
 }
 
+/* Disable transitions during resize */
+let resizeTimer;
+window.addEventListener("resize", () => {
+  document.documentElement.classList.add("is-resizing");
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    document.documentElement.classList.remove("is-resizing");
+  }, 200);
+});
+
 /* Clicking the dropdown button */
 toggle.addEventListener("click", (e) => {
   e.stopPropagation();

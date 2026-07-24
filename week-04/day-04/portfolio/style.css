@@ -10,17 +10,6 @@
    -------------------------------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
-* {
-  box-sizing: border-box;
-}
-
-*, *::before, *::after {
-  transition: 
-    background var(--dur-base) var(--ease-out), 
-    color var(--dur-base) var(--ease-out),
-    border var(--dur-base) var(--ease-out)
-}
-
 /* --------------------------------------------------------------------------
    1. LIGHT THEME (default)
    -------------------------------------------------------------------------- */
@@ -199,6 +188,23 @@
    -------------------------------------------------------------------------- */
 html {
   scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  transition: 
+    background var(--dur-base) var(--ease-out), 
+    color var(--dur-base) var(--ease-out),
+    border var(--dur-base) var(--ease-out)
+}
+
+.is-resizing *,
+.is-resizing *::before,
+.is-resizing *::after {
+  transition: none !important;
 }
 
 body {
